@@ -151,8 +151,8 @@ app.post('/api/place-order', async (req, res) => {
         }
 
         const mailOptions = {
-            from: 'nap.egy.store@gmail.com',
-            to: 'nap.egy.store@gmail.com',
+            from: '"NAP Store" <nap.egy.store@gmail.com>', // ضيفي الاسم ده كدة
+    to: 'nap.egy.store@gmail.com',
             subject: `🚨 NEW ORDER from ${customer.name}`,
             attachments: attachments,
             text: `
