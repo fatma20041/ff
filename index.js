@@ -38,7 +38,7 @@ const transporter = nodemailer.createTransport({
     secure: false, // استخدم false لـ port 587
     auth: {
         user: 'nap.egy.store@gmail.com',
-        pass: 'eqrl wxwl rliw hnhp' // App Password
+        pass: 'lnbe nqlk naha pumc' // App Password
     },
     tls: {
         rejectUnauthorized: false // لتجنب مشاكل الشهادات في السيرفرات السحابية
