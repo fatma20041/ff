@@ -2368,15 +2368,3 @@ input[type="email"], input[type="text"], input[type="tel"] {
     padding-left: 35px; /* حركة بسيطة لليمين عند الهوفر */
     color: #4CAF50;
 }
-/* تنسيق الهيدر عشان يلم نفسه في أي شاشة */
-.header-wrapper {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important; /* يمنع العناصر تنزل تحت بعض في اللاب */
-    padding: 10px 2% !important;
-    width: 100% !important;
-    max-width: 1400px !important; /* يحافظ على شكل اللاب توب العريض */
-    margin: 0 auto !important; /* يخلي الهيدر في نص الشاشة بالظبط */
-}
-
