@@ -36,7 +36,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'nap.egy.store@gmail.com',
-        pass: 'lnbe nqlk naha pumc' // App Password الجديد بتاعك
+        pass: 'lnbe nqlk naha pum' // App Password الجديد بتاعك
     }
 });
 
