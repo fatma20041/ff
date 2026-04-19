@@ -2367,3 +2367,45 @@ input[type="email"], input[type="text"], input[type="tel"] {
     padding-left: 35px; /* حركة بسيطة لليمين عند الهوفر */
     color: #4CAF50;
 }
+
+/* إخفاء زرار المنيو في الشاشات الكبيرة */
+.mobile-nav-toggle { display: none; cursor: pointer; }
+
+@media (max-width: 768px) {
+    /* تنظيم الهيدر في الموبايل */
+    .header-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+    }
+
+    /* إظهار الشرطتين */
+    .mobile-nav-toggle { display: block; }
+
+    /* اللوجو في السنتر بالظبط */
+    .logo-area {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* إخفاء القائمة الأصلية وتحويلها لمنيو تظهر بالضغط */
+    .nav-area {
+        display: none; /* هتختفي وتظهر بالـ JavaScript */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .nav-area.active { display: block; } /* لما نضغط على الشرطتين تظهر */
+    
+    .nav-area ul {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
