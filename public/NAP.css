@@ -1,3 +1,4 @@
+
 /* 1. استدعاء الخط */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
@@ -10,7 +11,6 @@
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #fff;
-    overflow-x: hidden; /* لمنع أي حركة عرضية في الموبايل */
 }
 
 /* 2. الهيدر */
@@ -28,11 +28,11 @@ body {
 .header-wrapper {
     display: grid;
     grid-template-columns: 1fr auto 1fr; 
-    align-items: center; /* خليتها سنتر بدل flex-start عشان الموبايل */
+    align-items: flex-start; 
     max-width: 100%;
 }
 
-/* 4. المنيو */
+/* 4. المنيو (الشمال) - ثابتة مش بتكبر */
 .nav-area {
     padding-top: 80px; 
 }
@@ -48,10 +48,12 @@ body {
     color: #000;
     font-size: 12px;
     text-transform: uppercase;
+    letter-spacing: 0px;
     padding-bottom: 5px;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease; /* سرعة استجابة الخط والبولد */
 }
 
+/* تأثير الـ Active والـ Hover للمنيو (بدون تكبير) */
 .nav-area ul li a.active {
     font-weight: 700;
     border-bottom: 2px solid #000;
@@ -62,7 +64,7 @@ body {
     border-bottom: 1px solid #888;
 }
 
-/* 5. اللوجو */
+/* 5. اللوجو (الرفع والتحريك) */
 .logo-area {
     display: flex;
     justify-content: center;
@@ -76,7 +78,7 @@ body {
     display: block;
 }
 
-/* 6. الأيقونات */
+/* 6. الأيقونات (اليمين) - هي اللي بتكبر (Scale) */
 .icons-area {
     padding-top: 80px; 
     display: flex;
@@ -88,7 +90,7 @@ body {
     text-decoration: none;
     color: #000;
     display: inline-block;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease; /* انيميشن التكبير */
 }
 
 .icon-link svg {
@@ -96,10 +98,22 @@ body {
     display: block;
 }
 
-.icon-link:hover, .icon-link.active {
+/* تأثير التكبير للأيقونات فقط */
+.icon-link:hover {
+    transform: scale(1.3); /* بتكبر بنسبة 30% لما تلمسيها */
+}
+
+/* لو عايزة الأيقونة اللي داس عليها تفضل كبيرة (اختياري) */
+.icon-link.active {
     transform: scale(1.3);
 }
 
+/* 7. الموبايل */
+@media (max-width: 1024px) {
+    .nav-area, .icons-area { padding-top: 15px; }
+    .main-logo { height: 60px; }
+    .logo-area { transform: translate(0, 0); }
+}
 /* --- سكشن الـ Hero الأساسي --- */
 .hero-section {
     width: 100%;
@@ -107,9 +121,10 @@ body {
     position: relative;
     overflow: hidden;
     background-color: #f9f9f9; 
+    
     display: flex;
     justify-content: center; 
-    align-items: center;      
+    align-items: center;     
 }
 
 .hero-image {
@@ -128,6 +143,8 @@ body {
     object-position: center;
 }
 
+/* --- تنسيق الكلام والبوتون (المسنتر) --- */
+
 .hero-content {
     color: #fff;  
     max-width: 900px; 
@@ -138,13 +155,17 @@ body {
 .hero-content h1 {
     font-size: 80px; 
     font-weight: 700; 
+    /* زقيت البوتون بعيد أكتر عن الكلام */
     margin-bottom: 70px; 
     letter-spacing: -1px; 
+    text-transform: none; 
     line-height: 1.1; 
 }
 
+/* --- تنسيق البوتون (كبير، شفاف في الهوفر) --- */
 .shop-btn {
     display: inline-block;
+    /* كبرناه شوية صغيرين (15px فوق وتحت، 45px يمين وشمال) */
     padding: 15px 45px; 
     background-color: #fff; 
     color: #000; 
@@ -153,18 +174,27 @@ body {
     font-size: 12px; 
     letter-spacing: 2px; 
     font-weight: 500; 
+    /* برواز أبيض عشان لما يقلب شفاف يفضل حدوده باينة */
     border: 1px solid #fff; 
     border-radius: 2px; 
     transition: all 0.4s ease;
+    text-align: center;
 }
 
+/* تأثير الهوفر الشفاف */
 .shop-btn:hover {
-    background-color: transparent;
-    color: #fff;
-    border-color: #fff;
+    background-color: transparent; /* يقلب شفاف */
+    color: #fff;                   /* الكلام يقلب أبيض عشان يبان على الصورة */
+    border-color: #fff;            /* البرواز يفضل أبيض وصريح */
 }
 
-/* --- سكشن الـ Collections --- */
+/* استجابة الموبايل */
+@media (max-width: 768px) {
+    .hero-section { height: 70vh; }
+    .hero-content h1 { font-size: 40px; margin-bottom: 40px; }
+    .shop-btn { padding: 12px 30px; font-size: 11px; }
+}
+/* --- تنسيق السكشن العام --- */
 .collections-section {
     padding: 120px 0 80px 0;
     background-color: #fff;
@@ -177,6 +207,7 @@ body {
     max-width: 1200px;
 }
 
+/* --- العنوان على اليسار --- */
 .collections-header {
     text-align: left;
     margin-bottom: 50px;
@@ -185,6 +216,7 @@ body {
 .collections-header h2 {
     font-size: 28px;
     font-weight: 700;
+    letter-spacing: 1px;
     color: #000;
 }
 
@@ -195,6 +227,7 @@ body {
     margin-top: 12px;
 }
 
+/* --- الـ Grid والأقسام --- */
 .collections-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -209,7 +242,7 @@ body {
 
 .collection-image {
     position: relative;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 3 / 4; /* النسبة المثالية لكروت الملابس */
     overflow: hidden;
     margin-bottom: 15px;
     background-color: #f9f9f9;
@@ -226,6 +259,7 @@ body {
     transform: scale(1.05);
 }
 
+/* --- تأثير كلمة Shop Now والتحريك (المهم) --- */
 .collection-info h3 {
     font-size: 15px;
     font-weight: 600;
@@ -238,14 +272,24 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* سرعة التحول */
 }
 
+.arrow-icon {
+    transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/* التأثير عند مرور الماوس: الكتابة تبقى Bold والكلمة تتحرك شوية مع السهم */
 .collection-item:hover .shop-collection-link {
-    font-weight: 800;
-    transform: translateX(5px);
+    font-weight: 800; /* بتتحول لـ Bold */
+    transform: translateX(5px); /* الكلمة كلها بتتحرك لليمين سنة */
 }
 
+.collection-item:hover .arrow-icon {
+    transform: translateX(3px); /* السهم بيتحرك زيادة */
+}
+
+/* --- تنسيق الـ Customize Overlay --- */
 .image-overlay-text {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -257,56 +301,6 @@ body {
     transition: background 0.4s ease;
 }
 
-/* ======================================================
-   تعديلات التكيف (Responsiveness) - ركزي هنا
-   ====================================================== */
-
-/* تابلت ولابتوب صغير */
-@media (max-width: 1024px) {
-    .main-logo { height: 80px; }
-    .nav-area, .icons-area { padding-top: 40px; }
-    .logo-area { transform: translate(0, -10px); }
-    .collections-grid { grid-template-columns: repeat(3, 1fr); }
-    .hero-content h1 { font-size: 60px; }
-}
-
-/* موبايل (Landscape) وتابلت صغير */
-@media (max-width: 768px) {
-    .header-wrapper {
-        grid-template-columns: 1fr auto 1fr;
-    }
-    
-    /* إخفاء المنيو في الموبايل لعدم التزاحم */
-    .nav-area { display: none; } 
-    
-    .icons-area { 
-        padding-top: 0; 
-        gap: 15px; 
-    }
-    
-    .logo-area { transform: none; }
-    .main-logo { height: 50px; }
-    
-    .hero-section { height: 70vh; }
-    .hero-content h1 { font-size: 40px; margin-bottom: 40px; }
-    .shop-btn { padding: 12px 30px; font-size: 11px; }
-    
-    .collections-section { padding: 60px 0; }
-    .collections-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    .collections-container { width: 90%; }
-}
-
-/* موبايل صغير جداً (Portrait) */
-@media (max-width: 480px) {
-    .hero-content h1 { font-size: 32px; }
-    .collections-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .collections-header h2 { font-size: 22px; }
-    .collection-info h3 { font-size: 12px; }
-    .shop-collection-link { font-size: 11px; }
-}
-
-
-/* --- تابع تنسيق الـ Collections (الأوفرلاي) --- */
 .image-overlay-text p {
     color: #fff;
     font-size: 13px;
@@ -321,9 +315,16 @@ body {
     background: rgba(0, 0, 0, 0.3);
 }
 
+/* الموبايل */
+@media (max-width: 1024px) {
+    .collections-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .collections-grid { grid-template-columns: 1fr; }
+}
 /* --- سكشن المنتجات THE DAILY DROP --- */
 .products-section {
-    padding: 100px 0; 
+    padding: 100px 0; /* مسافة كويسة بعيد عن اللي فوقه */
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -334,6 +335,7 @@ body {
     max-width: 1200px;
 }
 
+/* العنوان على الشمال */
 .products-header {
     text-align: left;
     margin-bottom: 50px;
@@ -362,11 +364,11 @@ body {
     margin: 12px 0 0 0;
 }
 
-/* الجريد الأساسي */
+/* الجريد الـ 20 بروداكت (4 في كل صف) */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 40px 20px;
+    gap: 40px 20px; /* مسافة رأسية أكبر لراحة العين */
 }
 
 .product-item {
@@ -395,21 +397,15 @@ body {
     transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-/* Hover Effect (Desktop Only) */
-@media (min-width: 1025px) {
-    .product-item:hover .product-image img {
-        transform: scale(1.04);
-    }
-    .product-item:hover .product-title {
-        font-weight: 800;
-        transform: translateX(5px);
-    }
-    .product-item:hover .product-price {
-        transform: translateX(5px);
-    }
+/* تأثير الـ Hover على الصورة */
+.product-item:hover .product-image img {
+    transform: scale(1.04);
 }
 
-.product-info { transition: all 0.3s ease; }
+/* --- تأثير الـ Bold والتحريك عند الهوفر --- */
+.product-info {
+    transition: all 0.3s ease;
+}
 
 .product-title {
     font-size: 14px;
@@ -423,13 +419,31 @@ body {
     font-size: 13px;
     font-weight: 600;
     color: #1a1a1a;
-    transition: all 0.3s ease;
 }
 
+/* لما الماوس ييجي على الكارت */
+.product-item:hover .product-title {
+    font-weight: 800; /* يتحول لـ Bold */
+    transform: translateX(5px); /* يتحرك لليمين سنة */
+}
+
+.product-item:hover .product-price {
+    transform: translateX(5px); /* السعر يتحرك معاه لانتظام الشكل */
+}
+
+/* للموبايل: منتجين في الصف عشان الزحمة */
+@media (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .products-container { width: 90%; }
+}
 /* --- Footer Styling --- */
 .main-footer {
-    background-color: #fff;
-    padding: 100px 0 30px 0;
+    background-color: #fff; /* خلفية بيضاء سادة عشان الـ Minimalist look */
+    padding: 100px 0 30px 0; /* مسافة كبيرة فوق عشان التميز */
     border-top: 1px solid #f0f0f0;
     margin-top: 80px;
 }
@@ -446,9 +460,10 @@ body {
 
 .footer-section {
     flex: 1;
-    min-width: 200px; /* قللتها شوية عشان التوازن */
+    min-width: 250px;
 }
 
+/* لوجو الفوتر */
 .footer-logo {
     font-size: 26px;
     font-weight: 800;
@@ -464,6 +479,7 @@ body {
     max-width: 280px;
 }
 
+/* العناوين الجانبية */
 .footer-section h3 {
     font-size: 13px;
     font-weight: 700;
@@ -473,16 +489,28 @@ body {
     color: #000;
 }
 
-.footer-links ul { list-style: none; padding: 0; }
-.footer-links ul li { margin-bottom: 12px; }
+/* تنسيق الروابط */
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 12px;
+}
+
 .footer-links ul li a {
     text-decoration: none;
     font-size: 13px;
     color: #777;
     transition: color 0.3s ease;
 }
-.footer-links ul li a:hover { color: #000; }
 
+.footer-links ul li a:hover {
+    color: #000;
+}
+
+/* تنسيق لينك الإنستجرام */
 .instagram-link {
     display: inline-flex;
     align-items: center;
@@ -492,11 +520,24 @@ body {
     font-size: 14px;
     font-weight: 600;
     margin-top: 10px;
+    padding: 8px 0;
     transition: transform 0.3s ease;
 }
 
-.instagram-link:hover { transform: translateY(-3px); }
+.instagram-link:hover {
+    transform: translateY(-3px); /* حركة بسيطة لفوق لما نلمسه */
+}
 
+.instagram-link span {
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.instagram-link:hover span {
+    border-bottom: 1px solid #000; /* خط بيظهر تحت الاسم عند الهوفر */
+}
+
+/* الجزء السفلي للحقوق */
 .footer-bottom {
     width: 85%;
     max-width: 1200px;
@@ -513,16 +554,36 @@ body {
     text-transform: uppercase;
 }
 
-/* --- صفحة كل المنتجات --- */
+/* استجابة الموبايل */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .brand-info p {
+        margin: 0 auto;
+    }
+    .instagram-link {
+        justify-content: center;
+    }
+}
+/* --- تنسيق صفحة المنتجات --- */
 .all-products-page {
-    padding: 60px 0 80px 0;
+    padding: 60px 0 80px 0; /* مسافة كبيرة فوق عشان الهيدر ميزنقش العنوان */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* تبييض المسافات من اليمين والشمال */
 }
 
+.products-container {
+    width: 85%; /* التحكم في عرض المحتوى */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- تنسيق العنوان الجديد --- */
 .products-page-header {
     margin-bottom: 60px;
-    text-align: left;
+    text-align: left; /* محاذاة لليسار بستايل براندات الموضة */
 }
 
 .page-subtitle {
@@ -534,55 +595,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* ======================================================
-   تعديلات التكيف (Responsiveness) للجزء الثاني
-   ====================================================== */
-
-@media (max-width: 1024px) {
-    .collections-grid, .products-grid { 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 20px;
-    }
-    .products-section { padding: 60px 0; }
-}
-
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 40px;
-    }
-    .brand-info p { margin: 0 auto; }
-    .instagram-link { justify-content: center; }
-    
-    .products-header, .products-page-header {
-        text-align: center;
-    }
-    .products-header .header-line { margin: 12px auto 0; }
-}
-
-@media (max-width: 600px) {
-    /* المنتجات بتبقي 2 في الصف عشان الموبايل ميبقاش طويل بزيادة وشكله شيك */
-    .products-grid, .collections-grid { 
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 15px 10px;
-    }
-    
-    .products-container, .footer-container { width: 92%; }
-    
-    .product-title { font-size: 12px; }
-    .product-price { font-size: 11px; }
-    
-    .products-header h2 { font-size: 24px; }
-}
-
-@media (max-width: 400px) {
-    /* للموبايلات الصغيرة جداً ممكن نخليها 1 في الصف لو الصور مش باينة */
-    .products-grid { grid-template-columns: 1fr; }
-}
-
-
-/* --- تنسيقات العناوين وصفحة المنتجات --- */
 .page-title {
     font-size: 36px;
     font-weight: 800;
@@ -604,15 +616,15 @@ body {
     margin-top: 20px;
 }
 
-/* الجريد الأساسي للمنتجات (تعديل المسافات) */
+/* تأكدي إن الجريد واخد مسافات صح */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 40px 25px;
+    gap: 40px 25px; /* مسافات واسعة وشيك */
 }
-
 /* --- ستايل صفحة الكونتكت المنسق --- */
 .contact-page-content {
+    /* رفعت العنوان لفوق (قريب من الهيدر) */
     padding: 60px 0 100px 0;
     display: flex;
     justify-content: center;
@@ -622,10 +634,12 @@ body {
 .contact-container {
     width: 90%;
     max-width: 700px;
+    /* العنوان والوصف هيبدأوا من الشمال */
     text-align: left;
 }
 
 .contact-header {
+    /* مسافة كبيرة بين العنوان والمربعات اللي تحت */
     margin-bottom: 100px;
 }
 
@@ -633,6 +647,7 @@ body {
     font-size: 42px;
     font-weight: 900;
     letter-spacing: -1px;
+    /* شيلت المارجن عشان يقرب أكتر من الهيدر */
     margin: 0;
 }
 
@@ -643,7 +658,7 @@ body {
     margin-top: 10px;
 }
 
-/* تنسيق الفورم */
+/* تنسيق الفورم (زي ما هو) */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -670,7 +685,6 @@ body {
     outline: none;
     transition: border-color 0.3s;
     background: transparent;
-    border-radius: 0; /* لمنع انحناء الحواف في الآيفون */
 }
 
 .contact-form input:focus, 
@@ -678,6 +692,7 @@ body {
     border-bottom-color: #000;
 }
 
+/* الزرار (زي ما هو بس اتأكدت إنه فضل شمال) */
 .send-btn {
     background-color: #000;
     color: #fff;
@@ -697,6 +712,7 @@ body {
     transform: translateY(-2px);
 }
 
+/* ستايل لوجو الإنستجرام الجديد */
 .alternative-contact {
     margin-top: 60px;
     text-align: left;
@@ -716,9 +732,20 @@ body {
     display: inline-block;
 }
 
-/* --- ستايل صفحات الأقسام (Category Pages) --- */
+.instagram-icon-link:hover {
+    color: #555;
+    transform: scale(1.1);
+}
+
+/* الموبايل */
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+/* --- ستايل صفحات الأقسام (Boxy, Oversize, etc.) --- */
 .category-page {
-    padding: 50px 0 80px 0;
+    padding: 50px 0 80px 0; /* مسافة تحت الهيدر */
     display: flex;
     justify-content: center;
 }
@@ -730,7 +757,7 @@ body {
 
 .category-header {
     margin-bottom: 60px;
-    text-align: left;
+    text-align: left; /* العنوان من الشمال زي ما طلبتي في الكونتكت */
 }
 
 .category-header h1 {
@@ -747,13 +774,12 @@ body {
     margin-top: 10px;
 }
 
+/* الـ Grid جاهزة للمنتجات بنفس استايل الموقع */
 .category-page .products-grid {
     display: grid;
-    /* التعديل هنا ليكون مرن تلقائياً */
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
 }
-
 /* --- Customize Page Styles --- */
 .customize-page { 
     padding: 40px 0 100px 0; 
@@ -786,56 +812,6 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
 
-/* ======================================================
-   تعديلات التكيف النهائية (Responsiveness)
-   ====================================================== */
-
-@media (max-width: 1024px) {
-    .products-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .customize-intro h1, .contact-header h1, .category-header h1 {
-        font-size: 36px;
-    }
-}
-
-@media (max-width: 768px) {
-    /* صفحة الكونتكت في الموبايل */
-    .contact-page-content { padding: 40px 0; }
-    .contact-header { margin-bottom: 50px; }
-    .form-row { flex-direction: column; gap: 20px; }
-    
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px 15px;
-    }
-    
-    .step-section { padding: 25px; }
-    .customize-intro { margin-bottom: 40px; }
-    .send-btn { width: 100%; } /* الزرار بعرض الشاشة في الموبايل أسهل للدوس */
-}
-
-@media (max-width: 480px) {
-    .page-title, .category-header h1, .contact-header h1 {
-        font-size: 28px;
-    }
-    
-    .customize-intro h1 {
-        font-size: 32px;
-    }
-    
-    .contact-container, .category-container {
-        width: 92%;
-    }
-
-    /* الحفاظ على المنتجات 2 في الصف لشكل احترافي */
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px 10px;
-    }
-}
-
-/* --- Customize Step 1 (Fit Selection) --- */
 .step-number { 
     font-size: 11px; 
     font-weight: 900; 
@@ -845,6 +821,7 @@ body {
     letter-spacing: 2px;
 }
 
+/* --- Fit Selection (Step 1) --- */
 .options-grid { 
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
@@ -870,12 +847,14 @@ body {
     border-color: #000; 
 }
 
-/* --- Color Studio (Step 2) --- */
+/* --- Color Studio (Step 2) - التعديل هنا فقط --- */
 .color-group {
     margin-bottom: 30px;
-    margin-top: 40px !important;
+    margin-top: 40px !important; /* بيبعد أول مجموعة عن كلمة Master Palette */
+
 }
 
+/* وده عشان يخلي شكل العناوين الفرعية (Basics, Royal..) أشيك وأبعد عن الدوائر */
 .color-group h4 {
     margin-bottom: 20px !important; 
     display: block;
@@ -883,7 +862,6 @@ body {
     font-size: 0.8rem;
     letter-spacing: 2px;
 }
-
 .color-options {
     display: flex;
     flex-wrap: wrap;
@@ -897,23 +875,36 @@ body {
     cursor: pointer;
     position: relative;
     transition: transform 0.3s ease, border 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.05); /* برواز خفيف جداً للألوان الفاتحة */
+}
+
+.color-circle:hover {
+    transform: scale(1.2);
+}
+
+.color-circle input {
+    opacity: 0; /* إخفاء زرار الراديو الحقيقي */
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+/* تأثير عند اختيار اللون */
+.color-circle:has(input:checked) {
+    border: 2px solid #000;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .color-circle input { display: none; }
 
-/* تأثير الاحترافية عند الوقوف بالماوس (Desktop Only) */
-@media (min-width: 1025px) {
-    .color-circle:hover {
-        transform: scale(1.2);
-        z-index: 2;
-    }
+/* تأثير الاحترافية عند الوقوف بالماوس */
+.color-circle:hover {
+    transform: scale(1.2);
+    z-index: 2;
 }
 
-/* Selected Color Effect */
+/* Selected Color Effect - البرواز الشيك اللي طلبتيه */
 .color-circle:has(input:checked) { 
     transform: scale(1.3); 
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000; 
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000; /* برواز أبيض ثم أسود لإبراز الاختيار */
     z-index: 5;
 }
 
@@ -960,21 +951,21 @@ body {
     cursor: pointer;
     transition: 0.4s;
     text-transform: uppercase;
-    border-radius: 0; /* شكل حاد شيك */
 }
 
 .submit-design-btn:hover {
     letter-spacing: 6px;
     background: #1a1a1a;
 }
-
-/* --- Search Overlay --- */
+/* --- Search Overlay Styles --- */
 .search-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(255, 255, 255, 0.98);
-    z-index: 99999; /* أعلى من أي شيء آخر */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.98); /* خلفية بيضاء شفافة شوية */
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -983,9 +974,26 @@ body {
     transition: all 0.4s ease;
 }
 
+/* لما يكون البحث مفتوح */
 .search-overlay.active {
     opacity: 1;
     visibility: visible;
+}
+
+.close-search {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000;
+}
+
+.search-form-wrapper {
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
 }
 
 .search-input {
@@ -998,6 +1006,7 @@ body {
     outline: none;
     padding: 10px;
     text-transform: uppercase;
+    letter-spacing: -1px;
 }
 
 .search-bar-line {
@@ -1008,15 +1017,25 @@ body {
     transition: width 0.6s ease 0.2s;
 }
 
-.search-overlay.active .search-bar-line { width: 100%; }
+.search-overlay.active .search-bar-line {
+    width: 100%;
+}
 
-/* --- User Dropdown --- */
+.search-hint {
+    margin-top: 20px;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+/* حاوية الأيقونة */
 .user-dropdown {
     position: relative;
     display: inline-block;
-    padding-bottom: 10px;
+    padding-bottom: 10px; /* مسافة أمان عشان الماوس ميفصلش وانت نازل للقائمة */
 }
 
+/* تنسيق القائمة المنسدلة (مخفية افتراضياً) */
 .dropdown-menu {
     display: none; 
     position: absolute;
@@ -1026,90 +1045,50 @@ body {
     min-width: 180px;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
     z-index: 1000;
-    border-radius: 4px; /* قللتها شوية لتماشي ستايل الموقع */
+    border-radius: 8px;
     padding: 10px 0;
     border: 1px solid #eee;
+    /* إضافة أنيميشن بسيط */
     opacity: 0;
     transform: translateY(10px);
     transition: all 0.3s ease;
 }
 
+/* إظهار القائمة عند التمرير (Hover) على الحاوية */
 .user-dropdown:hover .dropdown-menu {
     display: block;
     opacity: 1;
     transform: translateY(0);
 }
 
+/* تنسيق الروابط داخل القائمة */
 .dropdown-menu a {
     color: #333;
     padding: 10px 20px;
     text-decoration: none;
     display: block;
-    font-size: 13px;
+    font-size: 14px;
     text-align: right;
     transition: background 0.2s ease;
 }
 
-/* ======================================================
-   تعديلات التكيف النهائية (Mobile Updates)
-   ====================================================== */
-
-@media (max-width: 768px) {
-    /* الخطوات في الموبايل */
-    .options-grid {
-        grid-template-columns: 1fr; /* الاختيارات تحت بعض في الموبايل */
-        gap: 10px;
-    }
-    
-    .card-content { padding: 15px; }
-
-    /* تكبير دوائر الألوان لسهولة اللمس */
-    .color-circle {
-        width: 40px;
-        height: 40px;
-    }
-
-    .color-options {
-        gap: 12px;
-        justify-content: center; /* سنتر في الموبايل */
-    }
-
-    /* البحث في الموبايل */
-    .search-input { font-size: 24px; }
-    .search-form-wrapper { width: 90%; }
-
-    /* الدروب داون في الموبايل */
-    /* نصيحة: في الموبايل الـ Hover مابينجحش دايماً، 
-       يفضل برمجياً يفتح بالـ Click، لكن كـ CSS ده أفضل تعديل: */
-    .user-dropdown:active .dropdown-menu {
-        display: block;
-    }
-    
-    .dropdown-menu {
-        right: -50px; /* ترحيل بسيط عشان م تخرجش بره الشاشة */
-    }
-
-    .submit-design-btn {
-        padding: 20px;
-        font-size: 12px;
-        letter-spacing: 2px;
-    }
+.dropdown-menu a:hover {
+    background-color: #f8f8f8;
+    color: #000;
 }
 
-@media (max-width: 480px) {
-    .customize-intro h1 { font-size: 28px; }
-    .step-section { padding: 20px; }
-    .upload-label { padding: 20px; }
+.dropdown-menu hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 5px 0;
 }
-
-/* --- صفحات الدخول والتسجيل (Auth) --- */
+/* تنسيقات صفحات الدخول والتسجيل */
 .auth-container {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #f9f9f9;
-    padding: 20px;
 }
 
 .auth-box {
@@ -1127,7 +1106,6 @@ body {
     letter-spacing: 2px;
     margin-bottom: 10px;
     font-weight: 700;
-    text-transform: uppercase;
 }
 
 .auth-box p {
@@ -1138,7 +1116,6 @@ body {
 
 .input-group {
     margin-bottom: 15px;
-    text-align: left;
 }
 
 .input-group input {
@@ -1148,7 +1125,6 @@ body {
     outline: none;
     font-family: inherit;
     transition: border 0.3s;
-    border-radius: 0; /* شكل حاد وفخم */
 }
 
 .input-group input:focus {
@@ -1166,26 +1142,35 @@ body {
     letter-spacing: 1px;
     margin-top: 10px;
     transition: 0.3s;
-    text-transform: uppercase;
 }
 
-.auth-btn:hover { background: #333; }
+.auth-btn:hover {
+    background: #333;
+}
 
-.auth-footer { margin-top: 25px; }
-.auth-footer p { font-size: 13px; margin-bottom: 10px; }
-.auth-footer a { color: #000; text-decoration: underline; font-weight: 600; }
+.auth-footer {
+    margin-top: 25px;
+}
+
+.auth-footer p {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.auth-footer a {
+    color: #000;
+    text-decoration: underline;
+    font-weight: 600;
+}
 
 .back-home {
     display: block;
     margin-top: 20px;
     text-decoration: none !important;
-    font-size: 11px;
+    font-size: 12px;
     color: #888 !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
-
-/* --- صفحة الحساب والطلبات (Account) --- */
+/* تنسيقات صفحة الحساب والطلبات */
 .account-section {
     padding: 80px 5%;
     background-color: #fff;
@@ -1210,50 +1195,92 @@ body {
     letter-spacing: 1px;
 }
 
-.account-sidebar ul { list-style: none; padding: 0; }
-.account-sidebar ul li { margin-bottom: 15px; }
+.account-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.account-sidebar ul li {
+    margin-bottom: 15px;
+}
+
 .account-sidebar ul li a {
     text-decoration: none;
     color: #888;
-    font-size: 14px;
+    font-size: 15px;
     transition: 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 .account-sidebar ul li a.active, 
 .account-sidebar ul li a:hover {
     color: #000;
-    font-weight: 700;
+    font-weight: 600;
 }
 
-.logout-link { color: #b30000 !important; margin-top: 20px; display: inline-block; }
+.logout-link {
+    color: #b30000 !important;
+    margin-top: 20px;
+    display: inline-block;
+}
 
-.account-content { flex-grow: 1; }
+.account-content {
+    flex-grow: 1;
+}
+
 .account-content h3 {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 30px;
     border-bottom: 1px solid #eee;
     padding-bottom: 15px;
-    text-transform: uppercase;
+}
+
+/* فورم البيانات */
+.account-form .form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.account-form .input-group {
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.account-form label {
+    display: block;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.account-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #eee;
+    background: #fdfdfd;
+}
+
+.save-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 15px 40px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 20px;
 }
 
 /* جدول الطلبات */
-.orders-table-wrapper { overflow-x: auto; } /* عشان الجدول م يكسرش الموبايل */
-
 .orders-table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    min-width: 600px;
 }
 
 .orders-table th {
     padding: 15px;
     background: #f9f9f9;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .orders-table td {
@@ -1262,130 +1289,130 @@ body {
     font-size: 14px;
 }
 
-/* --- سكشن الدفع (Checkout) --- */
-.checkout-layout {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    max-width: 1100px;
-    margin: 0 auto;
-    min-height: 100vh;
-    background: #fff;
+.status-shipped { color: #2ecc71; font-weight: 600; }
+.status-delivered { color: #3498db; font-weight: 600; }
+
+.view-order {
+    color: #000;
+    text-decoration: underline;
+    font-size: 13px;
 }
 
+/* للموبايل */
+@media (max-width: 768px) {
+    .account-container { flex-direction: column; }
+    .account-sidebar { width: 100%; text-align: center; }
+}
+/* الحاوية الأساسية لتوسيط الصفحة */
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* تقسيم المسافة بين الفورم والملخص */
+    max-width: 1100px; /* العرض اللي هيلم الصفحة في النص */
+    margin: 0 auto; /* سر التوسيط */
+    min-height: 100vh;
+    box-shadow: 0 0 50px rgba(0,0,0,0.02); /* ظل خفيف جداً للفخامة */
+}
+
+/* الجانب الأيسر (الفورم) */
 .checkout-form-side {
-    padding: 60px 40px;
+    padding: 60px 40px; /* مسافات داخلية مريحة */
     background-color: #ffffff;
 }
 
+/* الجانب الأيمن (الملخص) */
 .checkout-summary-side {
     padding: 60px 40px;
-    background-color: #fafafa;
+    background-color: #fafafa; /* لون أوف وايت هادي */
     border-left: 1px solid #eeeeee;
 }
 
-.checkout-header { margin-bottom: 40px; }
+/* تعديل الهيدر واللوجو */
+.checkout-header {
+    margin-bottom: 40px;
+    text-align: left;
+}
+
 .logo-text {
     font-size: 24px;
     letter-spacing: 5px;
     font-weight: 800;
     margin-bottom: 15px;
     display: block;
-    color: #000;
-    text-decoration: none;
 }
 
+/* تنسيق الروابط (Breadcrumbs) */
 .breadcrumb {
     display: flex;
     gap: 10px;
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #a0a0a0;
 }
 
-.form-section { margin-bottom: 40px; }
+/* جعل الحقول ملمومة أكتر */
+.form-section {
+    margin-bottom: 30px;
+    max-width: 100%;
+}
+
 .form-section h3 {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 20px;
-    text-transform: uppercase;
 }
 
-/* توحيد ستايل الحقول في التشيك أوت */
-.checkout-layout input[type="text"], 
-.checkout-layout input[type="email"], 
-.checkout-layout input[type="tel"] {
+input[type="text"], 
+input[type="email"], 
+input[type="tel"] {
     width: 100%;
     padding: 14px;
     border: 1.5px solid #ebebeb;
-    border-radius: 2px;
+    border-radius: 4px;
     background: #fff;
     transition: all 0.3s ease;
-    margin-bottom: 15px;
+    box-sizing: border-box; /* عشان الـ padding ميطلعش برا */
 }
 
+input:focus {
+    border-color: #000;
+    outline: none;
+}
+
+/* زرار الاستمرار */
 .continue-btn {
     background: #000;
     color: #fff;
-    padding: 20px;
+    padding: 18px 35px;
     border: none;
+    border-radius: 2px;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     cursor: pointer;
-    width: 100%;
-    text-transform: uppercase;
+    width: 100%; /* خليه مالي العرض في الموبايل أو السكشن بتاعه */
     transition: 0.3s;
 }
 
-.continue-btn:hover { background: #333; }
+.continue-btn:hover {
+    background: #333;
+}
 
-/* ======================================================
-   تعديلات الاستجابة (Responsive Design)
-   ====================================================== */
-
+/* للموبايل عشان تفضل ملمومة */
 @media (max-width: 900px) {
     .checkout-layout {
-        grid-template-columns: 1fr; /* الملخص ينزل تحت الفورم */
+        grid-template-columns: 1fr;
+        max-width: 100%;
     }
     .checkout-summary-side {
-        border-left: none;
-        border-top: 1px solid #eee;
+        order: -1; /* الملخص يطلع فوق في الموبايل */
+        padding: 30px 20px;
     }
-}
-
-@media (max-width: 768px) {
-    /* الحساب */
-    .account-container { flex-direction: column; gap: 30px; }
-    .account-sidebar { 
-        width: 100%; 
-        text-align: center; 
-        border-bottom: 1px solid #eee;
-        padding-bottom: 20px;
-    }
-    .account-sidebar ul {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-    .account-sidebar ul li { margin-bottom: 0; }
-
-    /* الفورم */
-    .account-form .form-row { flex-direction: column; gap: 0; }
-    
-    .auth-box { padding: 30px 20px; }
-}
-
-@media (max-width: 480px) {
-    .checkout-form-side, .checkout-summary-side {
+    .checkout-form-side {
         padding: 40px 20px;
     }
-    .logo-text { font-size: 20px; letter-spacing: 3px; }
-    .auth-box h2 { font-size: 20px; }
 }
-
-   /* --- Checkout Page Layout & Reset --- */
+/* Checkout Page Reset & Layout */
 .checkout-page {
     background-color: #ffffff;
     color: #333;
@@ -1401,46 +1428,24 @@ body {
     min-height: 100vh;
 }
 
-/* الجانب الأيسر (الفورم) */
+/* Left Side - Form */
 .checkout-form-side {
     padding: 60px 40px 60px 0;
 }
 
 .checkout-header { margin-bottom: 40px; }
-.logo-text { 
-    font-size: 26px; 
-    letter-spacing: 6px; 
-    font-weight: 800; 
-    margin: 0 0 15px 0; 
-    color: #000;
-    text-decoration: none;
-}
-
-.breadcrumb { 
-    font-size: 11px; 
-    color: #a0a0a0; 
-    display: flex; 
-    gap: 8px; 
-    text-transform: uppercase; 
-}
+.logo-text { font-size: 26px; letter-spacing: 6px; font-weight: 800; margin: 0 0 15px 0; }
+.breadcrumb { font-size: 11px; color: #a0a0a0; display: flex; gap: 8px; text-transform: uppercase; }
 .breadcrumb .active { color: #000; font-weight: 700; }
 
-.section-title-flex { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: baseline; 
-    margin-bottom: 15px; 
-}
+.section-title-flex { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
 .section-title-flex h3 { font-size: 17px; margin: 0; }
-.section-title-flex a { color: #000; font-size: 13px; }
+.section-title-flex p { font-size: 13px; margin: 0; }
+.section-title-flex a { color: #000; }
 
 .form-section { margin-bottom: 35px; }
-
 .input-row { display: flex; gap: 12px; }
-
-.checkout-page input[type="email"], 
-.checkout-page input[type="text"], 
-.checkout-page input[type="tel"] {
+input[type="email"], input[type="text"], input[type="tel"] {
     width: 100%;
     padding: 13px;
     border: 1px solid #d9d9d9;
@@ -1448,12 +1453,9 @@ body {
     font-size: 14px;
     margin-bottom: 12px;
     box-sizing: border-box;
-    transition: border-color 0.3s;
 }
 
-.checkout-page input:focus { border-color: #000; outline: none; }
-
-/* أزرار التحكم في التشيك أوت */
+/* أزرار التحكم */
 .form-footer-v2 {
     display: flex;
     flex-direction: column;
@@ -1461,7 +1463,6 @@ body {
     gap: 20px;
     margin-top: 20px;
 }
-
 .continue-btn {
     width: 100%;
     background: #000;
@@ -1475,13 +1476,11 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-
 .continue-btn:hover { background: #333; }
-
 .back-to-cart-link { text-decoration: none; color: #666; font-size: 13px; transition: 0.3s; }
 .back-to-cart-link:hover { color: #000; text-decoration: underline; }
 
-/* الجانب الأيمن (الملخص) */
+/* Right Side - Summary */
 .checkout-summary-side {
     background-color: #fafafa;
     padding: 60px 0 60px 50px;
@@ -1489,7 +1488,6 @@ body {
 }
 
 .order-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-
 .item-img-wrapper {
     position: relative;
     width: 64px;
@@ -1498,9 +1496,7 @@ body {
     border: 1px solid #e1e1e1;
     border-radius: 8px;
 }
-
 .item-img-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 7px; }
-
 .item-quantity {
     position: absolute; top: -8px; right: -8px;
     background: rgba(114, 114, 114, 0.9);
@@ -1508,55 +1504,58 @@ body {
     border-radius: 50%; font-size: 11px;
     display: flex; align-items: center; justify-content: center;
 }
-
 .item-details { flex: 1; }
 .item-name { font-size: 14px; font-weight: 600; margin: 0; }
 .item-variant { font-size: 12px; color: #717171; }
 .item-price { font-size: 14px; font-weight: 500; }
 
-/* صندوق كود الخصم */
-.discount-box { 
-    display: flex; 
-    gap: 10px; 
-    padding: 20px 0; 
-    border-top: 1px solid #e1e1e1; 
-    border-bottom: 1px solid #e1e1e1; 
-    margin: 20px 0; 
+.discount-box { display: flex; gap: 10px; padding: 20px 0; border-top: 1px solid #e1e1e1; border-bottom: 1px solid #e1e1e1; margin: 20px 0; }
+.discount-box input { margin-bottom: 0; flex: 1; }
+.discount-box button { background: #eeeeee; border: none; padding: 0 20px; border-radius: 5px; font-weight: 600; cursor: pointer; }
+
+.price-calculations { display: flex; flex-direction: column; gap: 12px; }
+.calc-row { display: flex; justify-content: space-between; font-size: 14px; color: #545454; }
+.total-row { border-top: 1px solid #e1e1e1; padding-top: 20px; margin-top: 10px; color: #000; font-size: 18px; font-weight: 700; }
+.shipping-hint { font-size: 12px; color: #999; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .checkout-layout { grid-template-columns: 1fr; padding: 0 20px; }
+    .checkout-form-side { padding: 40px 0; }
+    .checkout-summary-side { border-left: none; padding: 40px 0; order: -1; }
 }
-
-.discount-box input { margin-bottom: 0 !important; flex: 1; }
-
+/* الشكل الافتراضي لزرار Apply (قبل الكتابة) */
 .discount-box button {
-    background: #f4f4f4;
-    color: #aaa;
+    background: #f4f4f4; /* رمادي فاتح جداً */
+    color: #aaa;        /* لون خط باهت */
     border: none;
     padding: 0 20px;
     border-radius: 5px;
     font-weight: 600;
     font-size: 13px;
-    cursor: not-allowed;
-    transition: all 0.3s ease;
+    cursor: not-allowed; /* شكل الماوس إنه غير متاح */
+    transition: all 0.3s ease; /* تنعيم الحركة */
 }
 
-/* الحالة النشطة لزرار الخصم */
+/* الشكل لما "ينور" (بعد ما يكتب حاجة) */
 .discount-box button.active {
-    background: #000;
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background: #000;    /* أسود صريح */
+    color: #fff;        /* خط أبيض */
+    cursor: pointer;    /* الماوس يرجع لشكل اليد */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* ضل خفيف يخليه "ينور" */
 }
-
-.price-calculations { display: flex; flex-direction: column; gap: 12px; }
-.calc-row { display: flex; justify-content: space-between; font-size: 14px; color: #545454; }
-.total-row { border-top: 1px solid #e1e1e1; padding-top: 20px; margin-top: 10px; color: #000; font-size: 18px; font-weight: 700; }
-
-/* --- صفحة السلة (Cart Page) --- */
-.cart-page { background-color: #fff; padding: 0; }
+/* تعديل حاوية صفحة السلة */
+.cart-page {
+    background-color: #fff;
+    /* شيلنا الـ padding القديم عشان ميزقش الهيدر */
+    padding: 0; 
+}
 
 .cart-container {
     max-width: 900px;
     margin: 0 auto;
-    padding: 60px 5%;
+    /* ضفنا الـ padding هنا بدل الـ body عشان يبدأ بعد الهيدر */
+    padding: 60px 5%; 
 }
 
 .cart-title {
@@ -1564,17 +1563,36 @@ body {
     text-align: center;
     margin-bottom: 50px;
     letter-spacing: 2px;
-    text-transform: uppercase;
+}
+
+/* السلة الفارغة */
+.empty-cart-view {
+    text-align: center;
+    padding: 100px 0;
+}
+
+.continue-shopping-btn {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 15px 40px;
+    text-decoration: none;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+/* السلة المليانة */
+.cart-table {
+    border-top: 1px solid #eee;
 }
 
 .cart-header-row {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     padding: 20px 0;
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     color: #888;
-    border-bottom: 1px solid #eee;
 }
 
 .cart-item {
@@ -1582,38 +1600,46 @@ body {
     grid-template-columns: 2fr 1fr 1fr;
     align-items: center;
     padding: 30px 0;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
 }
 
 .cart-item-info { display: flex; gap: 20px; }
-.cart-item-info img { width: 100px; height: 130px; object-fit: cover; }
-
-.item-text h3 { font-size: 16px; margin: 0 0 5px; font-weight: 700; }
-.item-text p { font-size: 13px; color: #777; margin: 0 0 10px; }
+.cart-item-info img { width: 100px; height: 120px; object-fit: cover; }
+.item-text h3 { font-size: 16px; margin: 0 0 5px; }
+.item-text p { font-size: 14px; color: #777; margin: 0 0 15px; }
 
 .remove-item-btn {
     background: none;
     border: none;
     text-decoration: underline;
-    font-size: 11px;
+    font-size: 12px;
     cursor: pointer;
-    color: #999;
-    padding: 0;
+    color: #888;
 }
 
 .cart-item-qty input {
     width: 50px;
     padding: 8px;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     text-align: center;
 }
 
-.cart-item-total { font-weight: 700; text-align: right; }
+.cart-item-total { font-weight: 600; text-align: right; }
 
 .cart-summary {
     margin-top: 50px;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
     text-align: right;
 }
+
+.summary-row {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.tax-note { font-size: 13px; color: #888; margin-bottom: 30px; }
 
 .checkout-btn {
     display: inline-block;
@@ -1626,68 +1652,43 @@ body {
     text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: 0.3s;
 }
-
-/* زرار الإضافة للسلة المصغر */
+/* تنسيق زرار الإضافة للسلة - النسخة المصغرة */
 .add-to-cart-btn {
-    min-width: 140px;
-    padding: 10px 20px;
+    width: auto; /* خليه على قد الكلمة أو حددي عرض ثابت */
+    min-width: 140px; /* عرض أدنى عشان ميبقاش صغير زيادة */
+    padding: 8px 20px; /* تقليل الارتفاع والزيادة من الجوانب */
     background-color: #000;
     color: #fff;
     border: 1px solid #000;
-    font-size: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; /* تصغير حجم الخط */
     font-weight: 600;
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin: 15px auto;
+    margin-top: 10px;
     text-transform: uppercase;
-    display: block;
+    display: block; /* عشان يفضل في سطر لوحده */
+    margin-left: auto; /* سنترة الزرار */
+    margin-right: auto;
 }
 
-.add-to-cart-btn:hover { background-color: #fff; color: #000; }
-
-/* ======================================================
-   Responsive Final Touch
-   ====================================================== */
-
-@media (max-width: 900px) {
-    .checkout-layout { grid-template-columns: 1fr; padding: 0 20px; }
-    .checkout-form-side { padding: 40px 0; }
-    .checkout-summary-side { 
-        border-left: none; 
-        padding: 30px 0; 
-        order: -1; /* الملخص يظهر أولاً في الموبايل */
-        background: #fff;
-        border-bottom: 1px solid #eee;
-    }
-    
-    .cart-header-row { display: none; } /* إخفاء الهيدر في الموبايل للتبسيط */
-    .cart-item {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-    .cart-item-info { grid-column: span 2; }
-    .cart-item-total { text-align: right; }
+.add-to-cart-btn:hover {
+    background-color: #fff;
+    color: #000;
 }
+/* About Page Custom Styles */
 
-@media (max-width: 480px) {
-    .cart-title { font-size: 24px; }
-    .checkout-btn { max-width: 100%; }
-    .input-row { flex-direction: column; gap: 0; }
-}
-
-/* --- About Page Custom Styles --- */
 .about-hero {
-    padding: 120px 20px 60px; 
+    /* مسافة متوازنة تحت الهيدر */
+    padding: 100px 20px 50px; 
     text-align: center;
     background-color: #ffffff;
 }
 
 .est-tag {
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 5px;
     color: #999;
     display: block;
@@ -1702,6 +1703,7 @@ body {
     font-weight: 300;
     color: #000;
     text-transform: uppercase;
+    /* إضافة لمسة شياكة حول العنوان */
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
     padding: 15px 40px;
@@ -1712,7 +1714,7 @@ body {
     max-width: 1100px;
     margin: 0 auto;
     padding: 40px 20px 100px;
-    line-height: 1.8;
+    line-height: 2; /* زيادة المسافة بين السطور لراحة العين */
     text-align: center;
 }
 
@@ -1720,16 +1722,16 @@ body {
     font-size: 1.4rem;
     color: #1a1a1a;
     font-style: italic;
-    margin-bottom: 100px;
+    margin-bottom: 100px; /* مسافة واضحة قبل ما نبدأ القصة */
     position: relative;
-    padding: 0 10%;
+    padding: 0 60px;
     font-weight: 300;
 }
 
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 80px; /* مسافة كبيرة بين الصورة والكلام عشان ميبقوش لازقين */
     text-align: left;
     align-items: center;
 }
@@ -1739,7 +1741,7 @@ body {
     height: auto;
     filter: grayscale(100%);
     transition: all 0.8s ease;
-    box-shadow: 20px 20px 0px #f9f9f9;
+    box-shadow: 20px 20px 0px #f9f9f9; /* حركة فنية: ظل خلفي صلب */
 }
 
 .about-image img:hover {
@@ -1756,6 +1758,7 @@ body {
     position: relative;
 }
 
+/* خط رفيع تحت العناوين الجانبية */
 .about-text h2::after {
     content: '';
     position: absolute;
@@ -1778,7 +1781,7 @@ body {
     justify-content: space-around;
     background: #000;
     color: #fff;
-    padding: 100px 40px;
+    padding: 100px 40px; /* زيادة مساحة السيكشن الأسود */
     text-align: center;
 }
 
@@ -1794,9 +1797,38 @@ body {
     color: #888;
 }
 
-/* --- Shipping Page Custom Styles --- */
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 80px 20px 40px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .about-hero h1 {
+        font-size: 1.8rem;
+        letter-spacing: 6px;
+        padding: 10px 20px;
+    }
+
+    .main-quote {
+        font-size: 1.2rem;
+        padding: 0 20px;
+        margin-bottom: 60px;
+    }
+
+    .brand-values {
+        flex-direction: column;
+        gap: 60px;
+    }
+}
+/* Shipping Page Custom Styles */
+
 .shipping-page {
-    padding: 100px 20px;
+    padding: 80px 20px;
     background-color: #ffffff;
 }
 
@@ -1827,12 +1859,19 @@ body {
     color: #000;
 }
 
+/* التنسيق الجديد البديل للمربع */
 .shipping-card.highlight {
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
-    padding: 80px 20px;
+    border-top: 1px solid #000; /* خط أسود حاد من فوق */
+    border-bottom: 1px solid #000; /* خط أسود حاد من تحت */
+    padding: 80px 0;
     text-align: center;
     margin-bottom: 80px;
+    background: transparent; /* شيلنا اللون الخلفي تماماً */
+}
+
+.card-icon {
+    margin-bottom: 30px;
+    opacity: 0.7;
 }
 
 .preorder-text {
@@ -1840,16 +1879,16 @@ body {
     font-weight: 300;
     color: #000;
     letter-spacing: 2px;
+    margin: 0;
     text-transform: uppercase;
 }
 
 .preorder-text strong {
     font-weight: 700;
-    background: #000;
+    background: #000; /* خليت المدة في مربع أسود صغير والكلام أبيض */
     color: #fff;
-    padding: 5px 20px;
+    padding: 2px 15px;
     margin: 0 5px;
-    display: inline-block; /* لضمان عدم تكسر المربع في الموبايل */
 }
 
 .sub-text {
@@ -1860,6 +1899,7 @@ body {
     text-transform: uppercase;
 }
 
+/* الشبكة السفلية بخطوط فاصلة */
 .shipping-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1871,11 +1911,41 @@ body {
     font-size: 0.9rem;
     letter-spacing: 3px;
     margin-bottom: 20px;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
+    color: #000;
 }
 
-/* --- Returns Page Custom Styles --- */
+.shipping-card p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+/* للموبايل */
+@media (max-width: 768px) {
+    .shipping-header h1 {
+        font-size: 2rem;
+        letter-spacing: 8px;
+    }
+    
+    .preorder-text {
+        font-size: 1.1rem;
+        line-height: 2;
+    }
+
+    .shipping-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .shipping-card.highlight {
+        padding: 60px 0;
+    }
+}
+/* Returns Page Custom Styles */
+
 .returns-page {
     padding: 100px 20px;
     background-color: #ffffff;
@@ -1897,6 +1967,7 @@ body {
     letter-spacing: 6px;
     color: #bbb;
     display: block;
+    margin-bottom: 15px;
 }
 
 .returns-header h1 {
@@ -1906,99 +1977,30 @@ body {
     text-transform: uppercase;
 }
 
+/* القسم الرئيسي */
+.policy-main {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
 .policy-statement {
     padding-bottom: 40px;
     border-bottom: 1px solid #f0f0f0;
     margin-bottom: 40px;
-    text-align: center;
 }
 
 .policy-statement h2 {
-    font-size: 11px;
+    font-size: 1rem;
     letter-spacing: 4px;
     color: #888;
-    text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
-/* ======================================================
-   Responsive Updates (About, Shipping, Returns)
-   ====================================================== */
-
-@media (max-width: 1024px) {
-    .about-grid { gap: 40px; }
-    .about-hero h1 { font-size: 2.2rem; letter-spacing: 8px; }
-}
-
-@media (max-width: 768px) {
-    /* About Mobile */
-    .about-hero { padding: 80px 20px 40px; }
-    .about-grid { 
-        grid-template-columns: 1fr; 
-        gap: 50px; 
-    }
-    .about-text { text-align: center; }
-    .about-text h2::after { left: 50%; transform: translateX(-50%); } /* سنترة الخط تحت العنوان */
-    
-    .about-hero h1 {
-        font-size: 1.5rem;
-        letter-spacing: 5px;
-        padding: 10px 15px;
-    }
-
-    .main-quote {
-        font-size: 1.1rem;
-        padding: 0 5%;
-        margin-bottom: 60px;
-    }
-
-    .brand-values {
-        flex-direction: column;
-        gap: 60px;
-        padding: 60px 20px;
-    }
-
-    /* Shipping Mobile */
-    .shipping-header h1 {
-        font-size: 1.8rem;
-        letter-spacing: 6px;
-    }
-    
-    .preorder-text {
-        font-size: 1.1rem;
-        line-height: 1.8;
-    }
-
-    .shipping-grid {
-        grid-template-columns: 1fr; /* العناصر تحت بعض */
-        gap: 40px;
-        text-align: center;
-    }
-
-    .shipping-card.highlight {
-        padding: 50px 15px;
-    }
-
-    /* Returns Mobile */
-    .returns-header h1 {
-        font-size: 1.6rem;
-        letter-spacing: 5px;
-    }
-}
-
-@media (max-width: 480px) {
-    .about-hero h1 { font-size: 1.2rem; letter-spacing: 3px; }
-    .preorder-text strong { padding: 2px 10px; font-size: 1rem; }
-    .about-image img { box-shadow: 10px 10px 0px #f9f9f9; } /* تصغير الظل في الشاشات الصغيرة */
-}
-
-/* --- Returns Policy & Highlights --- */
 .highlight-text {
     font-size: 1.8rem;
     color: #000;
     font-weight: 300;
     text-transform: uppercase;
-    text-align: center;
-    line-height: 1.4;
 }
 
 .highlight-text strong {
@@ -2016,7 +2018,6 @@ body {
     justify-content: center;
     gap: 20px;
     letter-spacing: 1px;
-    margin: 40px 0;
 }
 
 .notice-icon {
@@ -2028,7 +2029,6 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    flex-shrink: 0; /* بيمنع الدائرة إن شكلها يبوظ في الموبايل */
 }
 
 /* التفاصيل الإضافية */
@@ -2044,7 +2044,6 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 15px;
-    font-weight: 700;
 }
 
 .detail-item p {
@@ -2054,336 +2053,330 @@ body {
     font-weight: 300;
 }
 
-/* --- معاينة الصور (Image Preview) --- */
-#preview-container {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 15px;
-}
+/* الموبايل */
+@media (max-width: 768px) {
+    .policy-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .highlight-text {
+        font-size: 1.3rem;
+    }
 
-.preview-item {
-    position: relative;
-    width: 100px;
-    height: 100px;
+    .policy-notice {
+        flex-direction: column;
+        text-align: center;
+    }
 }
+ /* ستايل معاينة الصور */
+        #preview-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .preview-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #eee;
+        }
+        .remove-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
 
-.preview-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid #eee;
-}
-
-.remove-btn {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    z-index: 10;
-}
-
-/* --- رسائل الترحيب المنبثقة (Welcome/Cookie Popups) --- */
-.custom-overlay, .welcome-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    backdrop-filter: blur(5px);
-}
-
-.message-box, .welcome-box {
-    background: white;
-    padding: 35px;
-    border-radius: 15px;
-    max-width: 400px;
-    width: 85%;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-@keyframes popIn {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.welcome-box h2 { margin-bottom: 15px; font-weight: 800; text-transform: uppercase; }
-.welcome-box p { margin-bottom: 25px; color: #666; font-size: 14px; }
-.welcome-box button {
-    background: #000;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* --- شريط الإعلانات المتحرك (Announcement Bar) --- */
-.announcement-bar {
+        /* ستايل رسالة الترحيب/الكوكيز في منتصف الشاشة */
+        .welcome-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .welcome-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .welcome-box h2 { margin-bottom: 15px; color: #000; }
+        .welcome-box p { margin-bottom: 20px; color: #555; line-height: 1.5; }
+        .welcome-box button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .announcement-bar {
     background-color: #000 !important;
     color: #fff !important;
     width: 100% !important;
-    height: 35px;
+    height: 30px; /* ارتفاع الشريط */
     display: flex;
     align-items: center;
     overflow: hidden;
     white-space: nowrap;
+
+    /* التثبيت اللي ميخرهوش المية */
     position: fixed; 
-    top: 100px; /* سأفترض أن الهيدر عندك 100px، لو مختلف غيري الرقم */
+    top: 140px; /* ركزي هنا: زودي أو قللي الرقم ده لحد ما يلمس الهيدر بتاعك بالظبط */
     left: 0;
-    z-index: 9998;
+    z-index: 9999; /* عشان يفضل فوق الصور وهو بيتحرك */
+
+    margin: 0 !important;
+    padding: 0 !important;
     text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 1px;
+    font-size: 12px;
 }
 
+/* حركة النص (زي ما هي) */
 .scrolling-text {
     display: flex;
-    animation: scroll-left 20s linear infinite;
+    white-space: nowrap;
+    animation: scroll-left 15s linear infinite;
 }
 
-.scrolling-text span { padding: 0 50px; }
+.scrolling-text span {
+    padding: 0 40px;
+}
 
 @keyframes scroll-left {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
 }
-
-/* --- البحث المتقدم (Advanced Search Overlay) --- */
-.search-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(15px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10001;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s ease;
-}
-
-.search-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.search-content-box {
-    width: 90%;
-    max-width: 800px;
-    text-align: center;
-}
-
-.search-input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid #000;
-    color: #000 !important;
-    font-size: 2.5rem; 
-    font-weight: 600;
-    padding: 15px 0;
-    outline: none;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.search-hint {
-    color: #999;
-    font-size: 0.8rem;
-    margin-top: 20px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
-
-/* المربع الأسود للإغلاق */
-.mobile-close-btn {
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #000;
-    padding: 12px 35px;
-    margin-top: 50px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.mobile-close-btn:hover {
-    background-color: transparent;
-    color: #000;
-}
-
-/* تأثير الاهتزاز عند الخطأ */
-.shake-target {
-    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-}
-
-@keyframes shake {
-    10%, 90% { transform: translate3d(-1px, 0, 0); }
-    20%, 80% { transform: translate3d(2px, 0, 0); }
-    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-    40%, 60% { transform: translate3d(4px, 0, 0); }
-}
-
-/* ======================================================
-   تعديلات الاستجابة (Responsive Design)
-   ====================================================== */
-
-@media (max-width: 768px) {
-    .policy-details { grid-template-columns: 1fr; gap: 30px; }
-    
-    .highlight-text { font-size: 1.2rem; padding: 0 10px; }
-
-    .policy-notice {
-        flex-direction: column;
-        text-align: center;
-        padding: 40px 20px;
+/* 1. تنسيق الغطاء الكامل للخلفية */
+    .search-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.98); /* أبيض شفاف راقي */
+        backdrop-filter: blur(15px); /* تأثير تغبيش قوي للفخامة */
+        display: flex;
+        justify-content: center; /* توسيط أفقي */
+        align-items: center; /* توسيط رأسي */
+        z-index: 10000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
     }
 
-    .search-input { font-size: 1.5rem; } /* تصغير خط البحث في الموبايل */
-    
-    .announcement-bar { top: 80px; } /* تعديل مكان الشريط للموبايل لو الهيدر أصغر */
-    
-    .preview-item { width: 80px; height: 80px; } /* تصغير معاينة الصور للموبايل */
-}
+    .search-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
 
-@media (max-width: 480px) {
-    .message-box, .welcome-box { padding: 25px 15px; }
-    .welcome-box h2 { font-size: 1.2rem; }
-    .mobile-close-btn { width: 100%; } /* زرار الإغلاق مالي العرض في الموبايل */
-}
+    /* 2. صندوق المحتوى */
+    .search-content-box {
+        width: 85%;
+        max-width: 800px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-/* --- تنسيق القائمة لتظهر في منتصف الشاشة (Modal Style) --- */
+    /* 3. خانة الكتابة */
+    .search-input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 3px solid #000; /* خط أسود عريض وواضح */
+        color: #000 !important; /* لون الكتابة أسود صريح */
+        font-size: 3rem; 
+        font-weight: 600;
+        padding: 15px 0;
+        outline: none;
+        text-align: center;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
 
-/* 1. الطبقة المظلمة خلف القائمة (اختياري لزيادة التركيز) */
-.dropdown-overlay {
-    position: fixed;
+    .search-input::placeholder {
+        color: #999;
+        font-weight: 300;
+    }
+
+    /* 4. تلميح البحث والخطأ والاهتزاز */
+    .search-hint {
+        color: #333;
+        font-size: 0.9rem;
+        margin-top: 15px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    .search-error {
+        color: #ff4d4d;
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 1.1rem;
+        min-height: 25px;
+        display: block;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .search-error.visible {
+        opacity: 1;
+    }
+
+    .shake-target {
+        animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+
+    @keyframes shake {
+        10%, 90% { transform: translate3d(-2px, 0, 0); }
+        20%, 80% { transform: translate3d(4px, 0, 0); }
+        30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+        40%, 60% { transform: translate3d(6px, 0, 0); }
+    }
+
+    /* 5. تنسيق زر الإغلاق (The Black Box Button) - الجديد والمعدل */
+    .mobile-close-btn {
+        background-color: #000; /* المربع الأسود */
+        color: #fff; /* كتابة بيضاء */
+        border: 2px solid #000;
+        padding: 12px 30px;
+        margin-top: 40px; /* مسافة تحت السيرش */
+        font-size: 1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .close-search:hover {
+        background-color: transparent;
+        color: #000;
+    }
+
+   /* تنسيق الرسالة المنبثقة اللي بتظهر في نص الشاشة */
+.custom-overlay {
+    position: fixed; /* بيخليها ثابتة فوق كل حاجة */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(5px); /* تأثير تغبيش للخلفية */
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s ease;
-    z-index: 9998;
+    background: rgba(0, 0, 0, 0.7); /* خلفية سوداء شفافة */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* رقم عالي عشان تظهر فوق الهيدر والبحث */
 }
 
-.dropdown-overlay.active {
-    opacity: 1;
-    visibility: visible;
+.message-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 85%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-/* 2. القائمة نفسها */
+@keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+/* --- تنسيق القائمة لتظهر في منتصف الشاشة --- */
 .custom-dropdown {
     list-style: none;
     padding: 0;
     margin: 0;
     
-    /* التوسيط المطلق في الشاشة */
+    /* جعلها في منتصف الشاشة */
     position: fixed; 
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.85); /* تبدأ بحجم أصغر وتكبر */
+    transform: translate(-50%, -50%) scale(0.9); /* تبدأ بحجم أصغر قليلاً */
     
-    width: 90%; 
-    max-width: 400px; 
+    width: 90%; /* عرض القائمة بالنسبة للموبايل */
+    max-width: 400px; /* أقصى عرض لها على الشاشة الكبيرة */
     max-height: 0; 
     
     opacity: 0;
     visibility: hidden;
-    overflow: hidden; /* عشان العناصر م تظهرش قبل ما تفتح */
-    background: #fff;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.2); 
-    border-radius: 20px; /* حواف أكثر نعومة */
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* حركة Bounce خفيفة */
-    z-index: 9999;
-    text-align: center; /* سنترة الكلام داخل القائمة للفخامة */
+    overflow-y: auto;
+    background: #fff; /* خلفية بيضاء */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3); /* ظل قوي عشان تبرز */
+    border-radius: 15px; /* حواف دائرية شيك */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* حركة ناعمة */
+    z-index: 9999; /* عشان تكون فوق أي حاجة */
+    text-align: left;
 }
 
 /* --- الحالة النشطة للقائمة --- */
 .custom-dropdown.active {
-    max-height: 70vh; 
+    max-height: 60vh; /* تأخذ 60% من طول الشاشة كحد أقصى */
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
-    padding: 25px 0;
-    overflow-y: auto; /* السماح بالسكروول لو العناصر كتير */
+    transform: translate(-50%, -50%) scale(1); /* ترجع لحجمها الطبيعي */
+    padding: 20px 0;
 }
 
 /* --- تنسيق العناصر بالداخل --- */
 .custom-dropdown li {
-    padding: 18px 30px;
+    padding: 15px 25px;
     cursor: pointer;
     color: #000;
-    font-size: 0.95rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 1px solid #f8f8f8;
+    border-bottom: 1px solid #f0f0f0; /* خط خفيف بين العناصر */
 }
 
 .custom-dropdown li:last-child {
     border-bottom: none;
 }
 
-/* تأثير الهوفر */
 .custom-dropdown li:hover {
-    background: #fdfdfd;
-    color: #4CAF50; /* لون التفاعل الخاص بكِ */
-    letter-spacing: 2px; /* حركة توسيع بسيطة للكلام بدل الـ padding */
+    background: #f9f9f9;
+    padding-left: 35px; /* حركة بسيطة لليمين عند الهوفر */
+    color: #4CAF50;
+}
+/* تنسيق الهيدر عشان يلم نفسه في أي شاشة */
+.header-wrapper {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important; /* يمنع العناصر تنزل تحت بعض في اللاب */
+    padding: 10px 2% !important;
+    width: 100% !important;
+    max-width: 1400px !important; /* يحافظ على شكل اللاب توب العريض */
+    margin: 0 auto !important; /* يخلي الهيدر في نص الشاشة بالظبط */
 }
 
-/* تحسين شكل السكرول بار داخل القائمة */
-.custom-dropdown::-webkit-scrollbar {
-    width: 4px;
-}
-.custom-dropdown::-webkit-scrollbar-thumb {
-    background: #eee;
-    border-radius: 10px;
-}
-
-/* --- تعديلات الموبايل --- */
-@media (max-width: 768px) {
-    .custom-dropdown {
-        width: 85%; /* ترك مساحة بسيطة على الأطراف */
-        border-radius: 15px;
-    }
-    
-    .custom-dropdown li {
-        padding: 20px 20px;
-        font-size: 0.9rem;
-    }
-}
-
-/* ستايل إضافي لضمان ثبات العرض */
-.custom-dropdown-container {
-    width: 100%;
-    display: block;
-}
