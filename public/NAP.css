@@ -2368,44 +2368,74 @@ input[type="email"], input[type="text"], input[type="tel"] {
     color: #4CAF50;
 }
 
-/* إخفاء زرار المنيو في الشاشات الكبيرة */
-.mobile-nav-toggle { display: none; cursor: pointer; }
-
+/* تنسيقات أساسية للموبايل */
 @media (max-width: 768px) {
-    /* تنظيم الهيدر في الموبايل */
     .header-wrapper {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between; /* يوزع الشرطتين واللوجو والأيكونز */
         padding: 10px 15px;
+        position: relative;
+        height: 60px;
     }
 
-    /* إظهار الشرطتين */
-    .mobile-nav-toggle { display: block; }
+    /* الشرطتين على الشمال */
+    .mobile-menu-btn {
+        display: block !important;
+        cursor: pointer;
+        z-index: 1001;
+    }
 
-    /* اللوجو في السنتر بالظبط */
+    /* اللوجو في النص بالظبط */
     .logo-area {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        margin: 0 !important;
     }
 
-    /* إخفاء القائمة الأصلية وتحويلها لمنيو تظهر بالضغط */
+    /* الأيقونات على اليمين */
+    .icons-area {
+        display: flex;
+        gap: 10px;
+    }
+
+    /* إخفاء المنيو وتحويلها لمنيو منسدل */
     .nav-area {
-        display: none; /* هتختفي وتظهر بالـ JavaScript */
+        display: none; 
         position: absolute;
-        top: 100%;
+        top: 60px; /* تحت الهيدر بالظبط */
         left: 0;
         width: 100%;
-        background: white;
-        flex-direction: column;
-        border-bottom: 1px solid #eee;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 1000;
     }
-    
-    .nav-area.active { display: block; } /* لما نضغط على الشرطتين تظهر */
-    
+
+    /* لما تدوسي على الزرار تظهر */
+    .nav-area.active {
+        display: block;
+    }
+
     .nav-area ul {
         flex-direction: column;
-        padding: 20px;
+        padding: 0;
     }
+
+    .nav-area ul li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .nav-area ul li a {
+        display: block;
+        padding: 15px;
+        color: #000;
+    }
+}
+
+/* إخفاء زرار المنيو في اللاب توب */
+@media (min-width: 769px) {
+    .mobile-menu-btn { display: none; }
 }
