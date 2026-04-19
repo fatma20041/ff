@@ -30,13 +30,18 @@ mongoose.connect(dbURI)
   .catch((err) => console.log('Database Connection Error ❌:', err));
 
 // ---------------------------------------------------
-// 3. إعداد Nodemailer (إرسال الإيميلات)
+// 3. إعداد Nodemailer (التعديل الجديد للعمل على Vercel)
 // ---------------------------------------------------
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // استخدم false لـ port 587
     auth: {
         user: 'nap.egy.store@gmail.com',
         pass: 'eqrl wxwl rliw hnhp' // App Password
+    },
+    tls: {
+        rejectUnauthorized: false // لتجنب مشاكل الشهادات في السيرفرات السحابية
     }
 });
 
@@ -118,7 +123,7 @@ app.post('/api/update-account', async (req, res) => {
 });
 
 // ---------------------------------------------------
-// 7. ORDERS + EMAIL (تم التعديل لـ Vercel ✅)
+// 7. ORDERS + EMAIL
 // ---------------------------------------------------
 app.post('/api/place-order', async (req, res) => {
     try {
@@ -169,7 +174,10 @@ ${customInfoText}
             `
         };
 
-        // ننتظر إرسال الإيميل أولاً قبل إرسال الرد
+        // التأكد من جاهزية الـ transporter
+        await transporter.verify();
+        
+        // إرسال الإيميل وانتظار النتيجة
         await transporter.sendMail(mailOptions);
         console.log("Order Email Sent! ✅");
 
@@ -182,7 +190,7 @@ ${customInfoText}
 });
 
 // ---------------------------------------------------
-// 8. CONTACT (تم التعديل لـ Vercel ✅)
+// 8. CONTACT
 // ---------------------------------------------------
 app.post('/api/contact', async (req, res) => {
     try {
@@ -195,6 +203,7 @@ app.post('/api/contact', async (req, res) => {
             text: `Customer: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${comment}`
         };
 
+        await transporter.verify();
         await transporter.sendMail(mailOptions);
         console.log("Contact Email Sent! ✅");
 
