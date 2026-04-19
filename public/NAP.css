@@ -2430,3 +2430,83 @@ input[type="email"], input[type="text"], input[type="tel"] {
     gap: 20px !important;
     padding: 20px !important;
 }
+
+/* --- 1. القاعدة الأساسية لكل الأجهزة --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden; /* يمنع ظهور شريط تمرير بالعرض */
+    width: 100%;
+}
+
+/* --- 2. جعل الهيدر مرن (Responsive Header) --- */
+.header-wrapper {
+    display: flex !important;
+    flex-wrap: wrap; /* يسمح للعناصر بالنزول تحت بعض لو الشاشة ضاقت جداً */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 4%; /* مسافات جانبية مرنة بنسبة مئوية */
+    width: 100% !important;
+}
+
+/* --- 3. اللوجو (القلب النابض) --- */
+.main-logo {
+    max-width: 120px; /* أقصى عرض للوجو على اللاب */
+    height: auto;
+    flex: 0 1 auto; /* يسمح له بالانكماش ولا يسمح له بالتمدد بزيادة */
+}
+
+/* --- 4. القائمة (Nav) تجعلها تختفي أو تتحول في الشاشات الصغيرة --- */
+.nav-area {
+    flex: 1; /* تأخذ المساحة المتبقية */
+    display: flex;
+    justify-content: center;
+}
+
+.nav-area ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    flex-wrap: wrap; /* لو الكلمات كتير تنزل سطر جديد في الموبايل */
+    justify-content: center;
+}
+
+.nav-area ul li a {
+    text-decoration: none;
+    font-size: clamp(10px, 1.2vw, 16px); /* سحر الـ Clamp: خط بيكبر ويصغر لوحده حسب حجم الشاشة */
+    white-space: nowrap;
+}
+
+/* --- 5. الأيقونات --- */
+.icons-area {
+    display: flex;
+    gap: 15px;
+    flex: 0 1 auto;
+}
+
+/* --- 6. تعديلات خاصة للموبايل (أقل من 768px) --- */
+@media (max-width: 768px) {
+    .header-wrapper {
+        flex-direction: column; /* يرصهم تحت بعض (لوجو ثم منيو) أو يحافظ عليهم حسب رغبتك */
+        gap: 10px;
+    }
+    
+    .nav-area ul {
+        gap: 10px;
+    }
+    
+    .main-logo {
+        max-width: 80px; /* تصغير اللوجو في الموبايل */
+    }
+
+    /* ضبط صورة الـ Hero لتناسب الموبايل */
+    .hero-section img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+}
