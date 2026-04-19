@@ -9,16 +9,11 @@ const path = require('path');
 
 const app = express();
 app.use(express.static('public'));
+
 // 1. الإعدادات الأساسية
 app.use(cors());
 app.use(express.json({ limit: '100mb' })); 
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
-
-// ✅ تم تعطيل السطور التالية لأن Vercel يتعامل مع الملفات الثابتة من المجلد الرئيسي مباشرة
-// app.use(express.static(__dirname));
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'index.html'));
-// });
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -39,15 +34,9 @@ mongoose.connect(dbURI)
 // ---------------------------------------------------
 const transporter = nodemailer.createTransport({
     service: 'gmail',
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
     auth: {
         user: 'nap.egy.store@gmail.com',
-        pass: 'ixtd yukp mezo nrlg'
-    },
-    tls: {
-        rejectUnauthorized: false
+        pass: 'ixtd yukp mezo nrlg' // App Password
     }
 });
 
@@ -129,14 +118,12 @@ app.post('/api/update-account', async (req, res) => {
 });
 
 // ---------------------------------------------------
-// 7. ORDERS + EMAIL
+// 7. ORDERS + EMAIL (تم التعديل لـ Vercel ✅)
 // ---------------------------------------------------
 app.post('/api/place-order', async (req, res) => {
     try {
         const data = req.body;
         const { customer, payment, cart_items, total, custom_designs } = data;
-
-        res.status(200).json({ status: 'success' });
 
         let attachments = [];
         let customInfoText = "";
@@ -182,25 +169,40 @@ ${customInfoText}
             `
         };
 
-        transporter.sendMail(mailOptions).catch(err => console.error("Mail Error:", err));
+        // ننتظر إرسال الإيميل أولاً قبل إرسال الرد
+        await transporter.sendMail(mailOptions);
+        console.log("Order Email Sent! ✅");
+
+        res.status(200).json({ status: 'success', message: 'Order placed and email sent!' });
+
     } catch (err) {
-        console.error("Order processing error:", err);
+        console.error("Order processing error ❌:", err);
+        res.status(500).json({ status: 'error', message: 'Failed to process order' });
     }
 });
 
 // ---------------------------------------------------
-// 8. CONTACT
+// 8. CONTACT (تم التعديل لـ Vercel ✅)
 // ---------------------------------------------------
-app.post('/api/contact', (req, res) => {
-    const { name, email, phone, comment } = req.body;
-    res.status(200).json({ status: 'success' });
-    const mailOptions = {
-        from: 'nap.egy.store@gmail.com',
-        to: 'nap.egy.store@gmail.com',
-        subject: `📩 Contact Form: ${name}`,
-        text: `Customer: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${comment}`
-    };
-    transporter.sendMail(mailOptions).catch(err => console.error("Contact Mail Error:", err));
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { name, email, phone, comment } = req.body;
+        
+        const mailOptions = {
+            from: 'nap.egy.store@gmail.com',
+            to: 'nap.egy.store@gmail.com',
+            subject: `📩 Contact Form: ${name}`,
+            text: `Customer: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${comment}`
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log("Contact Email Sent! ✅");
+
+        res.status(200).json({ status: 'success' });
+    } catch (err) {
+        console.error("Contact Mail Error ❌:", err);
+        res.status(500).json({ status: 'error' });
+    }
 });
 
 // ---------------------------------------------------
