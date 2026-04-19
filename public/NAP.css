@@ -2368,66 +2368,88 @@ input[type="email"], input[type="text"], input[type="tel"] {
     color: #4CAF50;
 }
 
-/* تنسيق الموبايل فقط */
-@media (max-width: 768px) {
-    .yonyo-header {
-        background: #fff;
-        width: 100%;
-        margin-bottom: 0 !important; /* بيلغي الفراغ اللي بين الهيدر والشريط الأسود */
-        padding-top: 15px; /* بيزود حجم الهيدر من فوق */
-        border-bottom: 1px solid #eee;
-    }
+/* --- تنسيق عام ثابت --- */
+.yonyo-header {
+    background: #fff;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
 
+/* --- تنسيق اللاب توب (Desktop) --- */
+@media (min-width: 769px) {
     .header-wrapper {
         display: flex;
-        flex-direction: column; /* يخلي اللوجو فوق والصف التاني تحته */
+        justify-content: space-between;
         align-items: center;
-        gap: 15px; /* المسافة بين اللوجو وبين الصف اللي تحته */
+        padding: 20px 40px;
+    }
+    .logo-area { order: 2; } /* اللوجو في النص */
+    .left-section { order: 1; display: flex; align-items: center; gap: 20px; }
+    .right-section { order: 3; display: flex; gap: 20px; }
+    .mobile-menu-btn { display: none; }
+    .desktop-nav ul { display: flex; list-style: none; gap: 15px; }
+}
+
+/* --- تنسيق الموبايل (Mobile) --- */
+@media (max-width: 768px) {
+    .header-wrapper {
+        display: flex;
+        flex-direction: column; /* اللوجو فوق والتحكم تحت */
+        align-items: center;
+        padding: 15px 0 10px 0;
+    }
+
+    .logo-area {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
     }
 
     .logo-area img {
-        height: 35px; /* حجم اللوجو */
+        height: 50px; /* حجم اللوجو كبير */
     }
 
-    .header-controls {
+    .header-content {
         width: 100%;
         display: flex;
-        justify-content: space-between; /* يودي الشرطتين شمال والأيكونز يمين */
-        align-items: center;
-        padding: 0 15px 10px 15px; /* مسافة من الجوانب ومن تحت */
+        justify-content: space-between; /* يوزع شمال ويمين */
+        padding: 0 20px;
     }
 
-    /* تنسيق المنيو لما تفتح */
-    .nav-area {
-        display: none; 
+    .left-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .right-section {
+        display: flex;
+        gap: 15px;
+    }
+
+    .desktop-nav { display: none; } /* نخفي منيو اللاب */
+
+    /* تنسيق المنيو اللي بتفتح */
+    .mobile-nav-list {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
         width: 100%;
         background: #fff;
-        position: absolute;
-        top: 100%; 
-        left: 0;
-        z-index: 9999;
-        border-top: 1px solid #f0f0f0;
+        z-index: 999;
+        border-top: 1px solid #eee;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
 
-    .nav-area.active {
-        display: block !important;
+    .mobile-nav-list.active {
+        display: block !important; /* تظهر لما ندوس */
     }
 
-    .nav-area ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .nav-area li {
-        text-align: center;
-        border-bottom: 1px solid #eee;
-    }
-
-    .nav-area li a {
-        display: block;
-        padding: 15px;
-        color: #000;
-        text-decoration: none;
-    }
+    .mobile-nav-list ul { list-style: none; padding: 0; }
+    .mobile-nav-list li { text-align: center; border-bottom: 1px solid #f9f9f9; }
+    .mobile-nav-list li a { display: block; padding: 15px; color: #000; text-decoration: none; }
 }
