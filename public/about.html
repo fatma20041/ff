@@ -9,18 +9,18 @@
 </head>
 <body>
 
-     <header class="yonyo-header">
+    <header class="yonyo-header">
     <div class="header-wrapper">
-        <div class="mobile-nav-toggle" id="menu-open">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
+        <div class="mobile-menu-btn" id="open-menu">
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                <line x1="3" y1="7" x2="21" y2="7"></line>
+                <line x1="3" y1="15" x2="21" y2="15"></line>
             </svg>
         </div>
 
-        <nav class="nav-area" id="nav-menu">
+        <nav class="nav-area" id="mobile-nav">
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="product.html">Products</a></li>
                 <li><a href="return.html">Return & Exchange Policy</a></li>
                 <li><a href="shipping.html">Shipping Policy</a></li>
@@ -30,7 +30,7 @@
 
         <div class="logo-area">
             <a href="index.html">
-                <img src="logo.jpeg" alt="NAP Logo" class="main-logo"> 
+                <img src="logo.jpeg" alt="NAP Logo" loading="lazy" class="main-logo"> 
             </a>
         </div>
 
@@ -38,17 +38,29 @@
             <a href="#" class="icon-link" id="search-trigger">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </a>
-            <div class="user-dropdown" id="user-menu">
+
+            <div class="user-dropdown">
                 <a href="#" class="icon-link">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
                 </a>
-            </div>
+                <div class="dropdown-menu">
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Register</a>
+                    <hr>
+                    <a href="account.html">My Account</a>
+                </div>
+            </div> 
+
             <a href="cart.html" class="icon-link">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
             </a>
         </div>
     </div>
 </header>
+    
     <div class="announcement-bar">
     <div class="scrolling-text">
         <span>Free shipping for orders above 999 EGP — Shop Now! &nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -352,9 +364,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
     
-    document.getElementById('menu-open').addEventListener('click', function() {
-        document.getElementById('nav-menu').classList.toggle('active');
+  const menuBtn = document.getElementById('open-menu');
+    const navMenu = document.getElementById('mobile-nav');
+
+    menuBtn.addEventListener('click', function() {
+        // لو المنيو مقفولة افتحيها.. لو مفتوحة اقفليها
+        navMenu.classList.toggle('active');
     });
+
+    // اختياري: يقفل المنيو لو دوستي في أي حتة بره
+    window.onclick = function(event) {
+        if (!event.target.closest('.mobile-menu-btn') && !event.target.closest('.nav-area')) {
+            navMenu.classList.remove('active');
+        }
+    }
 </script>
 
 
