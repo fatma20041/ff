@@ -370,14 +370,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-const menuBtn = document.getElementById("menu-btn");
-const closeBtn = document.getElementById("close-menu");
-const sideMenu = document.getElementById("side-menu");
+document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById("menu-btn");
+            const closeBtn = document.getElementById("close-menu");
+            const sideMenu = document.getElementById("side-menu");
 
-menuBtn.onclick = () => sideMenu.classList.add("active");
-closeBtn.onclick = () => sideMenu.classList.remove("active");
-</script>
+            if (menuBtn && sideMenu && closeBtn) {
+                // فتح المنيو
+                menuBtn.onclick = (e) => {
+                    e.preventDefault();
+                    sideMenu.classList.add("active");
+                };
 
+                // قفل المنيو بالزرار
+                closeBtn.onclick = () => {
+                    sideMenu.classList.remove("active");
+                };
+
+                // قفل المنيو لو دوستي في أي مكان بره الصندوق الأبيض
+                document.addEventListener('click', (e) => {
+                    if (!sideMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                        sideMenu.classList.remove("active");
+                    }
+                });
+            }
+        });
 
 </body>
 </html>
