@@ -30,18 +30,13 @@ mongoose.connect(dbURI)
   .catch((err) => console.log('Database Connection Error ❌:', err));
 
 // ---------------------------------------------------
-// 3. إعداد Nodemailer (التعديل الجديد للعمل على Vercel)
+// 3. إعداد Nodemailer (مضبوط للسرعة على Vercel)
 // ---------------------------------------------------
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // استخدم false لـ port 587
+    service: 'gmail',
     auth: {
         user: 'nap.egy.store@gmail.com',
-        pass: 'lnbe nqlk naha pumc' // App Password
-    },
-    tls: {
-        rejectUnauthorized: false // لتجنب مشاكل الشهادات في السيرفرات السحابية
+        pass: 'lnbe nqlk naha pumc' // App Password الجديد بتاعك
     }
 });
 
@@ -151,8 +146,8 @@ app.post('/api/place-order', async (req, res) => {
         }
 
         const mailOptions = {
-            from: '"NAP Store" <nap.egy.store@gmail.com>', // ضيفي الاسم ده كدة
-    to: 'nap.egy.store@gmail.com',
+            from: '"NAP Store" <nap.egy.store@gmail.com>', 
+            to: 'nap.egy.store@gmail.com',
             subject: `🚨 NEW ORDER from ${customer.name}`,
             attachments: attachments,
             text: `
@@ -174,10 +169,7 @@ ${customInfoText}
             `
         };
 
-        // التأكد من جاهزية الـ transporter
-        await transporter.verify();
-        
-        // إرسال الإيميل وانتظار النتيجة
+        // إرسال الإيميل مباشرة بدون تعطيل السيرفر بفحوصات إضافية
         await transporter.sendMail(mailOptions);
         console.log("Order Email Sent! ✅");
 
@@ -197,13 +189,13 @@ app.post('/api/contact', async (req, res) => {
         const { name, email, phone, comment } = req.body;
         
         const mailOptions = {
-            from: 'nap.egy.store@gmail.com',
+            from: '"NAP Store" <nap.egy.store@gmail.com>', // تم توحيد الاسم هنا كمان
             to: 'nap.egy.store@gmail.com',
             subject: `📩 Contact Form: ${name}`,
             text: `Customer: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${comment}`
         };
 
-        await transporter.verify();
+        // إرسال مباشر
         await transporter.sendMail(mailOptions);
         console.log("Contact Email Sent! ✅");
 
