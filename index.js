@@ -30,13 +30,13 @@ mongoose.connect(dbURI)
   .catch((err) => console.log('Database Connection Error ❌:', err));
 
 // ---------------------------------------------------
-// 3. إعداد Nodemailer (مضبوط للسرعة على Vercel)
+// 3. إعداد Nodemailer (آمن ومربوط بـ Vercel)
 // ---------------------------------------------------
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'nap.egy.store@gmail.com',
-        pass: 'lnbe nqlk naha pum' // App Password الجديد بتاعك
+        pass: process.env.EMAIL_PASS // 👈 هو ده التعديل الصح! مفيش باسورد مكتوب هنا
     }
 });
 
@@ -169,7 +169,7 @@ ${customInfoText}
             `
         };
 
-        // إرسال الإيميل مباشرة بدون تعطيل السيرفر بفحوصات إضافية
+        // إرسال الإيميل مباشرة
         await transporter.sendMail(mailOptions);
         console.log("Order Email Sent! ✅");
 
@@ -189,7 +189,7 @@ app.post('/api/contact', async (req, res) => {
         const { name, email, phone, comment } = req.body;
         
         const mailOptions = {
-            from: '"NAP Store" <nap.egy.store@gmail.com>', // تم توحيد الاسم هنا كمان
+            from: '"NAP Store" <nap.egy.store@gmail.com>',
             to: 'nap.egy.store@gmail.com',
             subject: `📩 Contact Form: ${name}`,
             text: `Customer: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${comment}`
