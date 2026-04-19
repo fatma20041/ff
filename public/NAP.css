@@ -1,7 +1,4 @@
-* {
-    box-sizing: border-box;
-    max-width: 100%;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; max-width: 100%; }
 /* 1. استدعاء الخط */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
@@ -2373,140 +2370,30 @@ input[type="email"], input[type="text"], input[type="tel"] {
 }
 
 
-/* 2. تعديل الهيدر عشان يكون "مطاط" */
+/* تنسيق الهيدر عشان يلم نفسه في أي شاشة */
 .header-wrapper {
     display: flex !important;
-    justify-content: space-between !important; /* بيوزع العناصر (منيو - لوجو - أيقونات) بالعدل */
+    justify-content: space-between !important;
     align-items: center !important;
-    padding: 10px 5%; /* مسافة أمان 5% يمين وشمال عشان ميبقاش لازق في الحواف */
+    flex-wrap: nowrap !important; /* يمنع العناصر تنزل تحت بعض في اللاب */
+    padding: 10px 2% !important;
     width: 100% !important;
-    flex-wrap: nowrap !important; /* يمنعهم ينزلوا تحت بعض */
+    max-width: 1400px !important; /* يحافظ على شكل اللاب توب العريض */
+    margin: 0 auto !important; /* يخلي الهيدر في نص الشاشة بالظبط */
 }
 
-/* 3. اللوجو: حجمه يتغير بناءً على الشاشة */
-.main-logo {
-    max-height: 60px; /* أقصى طول له على اللاب */
-    width: auto;
-    flex-shrink: 0; /* يمنع اللوجو إنه يتفعص لو الزحمة زادت */
-}
-
+/* تصغير اللوجو والمنيو في الموبايل بس */
 @media (max-width: 768px) {
-    .main-logo {
-        max-height: 40px; /* يصغر شوية في الموبايل والتابلت */
-    }
-}
-
-/* 4. المنيو (القائمة): تختفي في الشاشات الصغيرة جداً أو تصغر */
-.nav-area ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-@media (max-width: 1024px) { /* التابلت والموبايل */
     .nav-area ul {
-        gap: 10px; /* تقريب الكلام من بعضه */
+        gap: 8px !important;
     }
     .nav-area ul li a {
-        font-size: 13px; /* تصغير الخط بسيط */
+        font-size: 11px !important;
     }
-}
-
-@media (max-width: 480px) { /* الموبايل الصغير */
-    .nav-area ul li a {
-        font-size: 10px;
-        white-space: nowrap;
-    }
-}
-
-/* 5. شبكة المنتجات (الـ Grid): */
-.products-grid {
-    display: grid !important;
-    /* السطر اللي جاي ده هو السحر: */
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important; 
-    /* معناه: رص المنتجات جنب بعض، ولو المكان ضيق نزل المنتج اللي ملوش مكان تحت لوحده تلقائياً */
-    gap: 20px !important;
-    padding: 20px !important;
-}
-
-/* --- 1. القاعدة الأساسية لكل الأجهزة --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    overflow-x: hidden; /* يمنع ظهور شريط تمرير بالعرض */
-    width: 100%;
-}
-
-/* --- 2. جعل الهيدر مرن (Responsive Header) --- */
-.header-wrapper {
-    display: flex !important;
-    flex-wrap: wrap; /* يسمح للعناصر بالنزول تحت بعض لو الشاشة ضاقت جداً */
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 4%; /* مسافات جانبية مرنة بنسبة مئوية */
-    width: 100% !important;
-}
-
-/* --- 3. اللوجو (القلب النابض) --- */
-.main-logo {
-    max-width: 120px; /* أقصى عرض للوجو على اللاب */
-    height: auto;
-    flex: 0 1 auto; /* يسمح له بالانكماش ولا يسمح له بالتمدد بزيادة */
-}
-
-/* --- 4. القائمة (Nav) تجعلها تختفي أو تتحول في الشاشات الصغيرة --- */
-.nav-area {
-    flex: 1; /* تأخذ المساحة المتبقية */
-    display: flex;
-    justify-content: center;
-}
-
-.nav-area ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    flex-wrap: wrap; /* لو الكلمات كتير تنزل سطر جديد في الموبايل */
-    justify-content: center;
-}
-
-.nav-area ul li a {
-    text-decoration: none;
-    font-size: clamp(10px, 1.2vw, 16px); /* سحر الـ Clamp: خط بيكبر ويصغر لوحده حسب حجم الشاشة */
-    white-space: nowrap;
-}
-
-/* --- 5. الأيقونات --- */
-.icons-area {
-    display: flex;
-    gap: 15px;
-    flex: 0 1 auto;
-}
-
-/* --- 6. تعديلات خاصة للموبايل (أقل من 768px) --- */
-@media (max-width: 768px) {
-    .header-wrapper {
-        flex-direction: column; /* يرصهم تحت بعض (لوجو ثم منيو) أو يحافظ عليهم حسب رغبتك */
-        gap: 10px;
-    }
-    
-    .nav-area ul {
-        gap: 10px;
-    }
-    
     .main-logo {
-        max-width: 80px; /* تصغير اللوجو في الموبايل */
+        max-width: 70px !important;
     }
-
-    /* ضبط صورة الـ Hero لتناسب الموبايل */
-    .hero-section img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
+    .icons-area {
+        gap: 8px !important;
     }
 }
