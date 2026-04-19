@@ -72,7 +72,7 @@ body {
 }
 
 .main-logo {
-    height: 120px; 
+    height: clamp(60px, 8vw, 120px);
     width: auto;
     display: block;
 }
@@ -152,10 +152,10 @@ body {
 }
 
 .hero-content h1 {
-    font-size: 80px; 
+    font-size: clamp(32px, 6vw, 80px);
     font-weight: 700; 
     /* زقيت البوتون بعيد أكتر عن الكلام */
-    margin-bottom: 70px; 
+    margin-bottom: clamp(20px, 5vw, 70px);
     letter-spacing: -1px; 
     text-transform: none; 
     line-height: 1.1; 
@@ -195,7 +195,7 @@ body {
 }
 /* --- تنسيق السكشن العام --- */
 .collections-section {
-    padding: 120px 0 80px 0;
+   padding: clamp(60px, 10vw, 120px) 0;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -229,7 +229,7 @@ body {
 /* --- الـ Grid والأقسام --- */
 .collections-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
@@ -330,7 +330,8 @@ body {
 }
 
 .products-container {
-    width: 85%;
+    width: min(1200px, 90%);
+    margin: auto;
     max-width: 1200px;
 }
 
@@ -2146,7 +2147,7 @@ input[type="email"], input[type="text"], input[type="tel"] {
 
     /* التثبيت اللي ميخرهوش المية */
     position: fixed; 
-    top: 140px; /* ركزي هنا: زودي أو قللي الرقم ده لحد ما يلمس الهيدر بتاعك بالظبط */
+    top: 100%;/* ركزي هنا: زودي أو قللي الرقم ده لحد ما يلمس الهيدر بتاعك بالظبط */
     left: 0;
     z-index: 9999; /* عشان يفضل فوق الصور وهو بيتحرك */
 
@@ -2366,4 +2367,73 @@ input[type="email"], input[type="text"], input[type="tel"] {
     background: #f9f9f9;
     padding-left: 35px; /* حركة بسيطة لليمين عند الهوفر */
     color: #4CAF50;
+}
+
+@media (max-width: 768px) {
+
+    .nav-area ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .icons-area {
+        gap: 15px;
+    }
+
+    .hero-section {
+        height: 70vh;
+    }
+
+    .collections-container,
+    .products-container {
+        width: 90%;
+    }
+}
+
+/* نخبي زرار المنيو في الديسكتوب */
+.menu-toggle {
+    display: none;
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+
+    /* نخبي المنيو القديمة */
+    .nav-area {
+        display: none;
+    }
+
+    /* نظهر زرار المنيو */
+    .menu-toggle {
+        display: block;
+        font-size: 22px;
+        background: none;
+        border: none;
+    }
+
+    /* نعدل توزيع الهيدر */
+    .header-wrapper {
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+    }
+
+    /* نقلل حجم اللوجو */
+    .main-logo {
+        height: 60px;
+    }
+}
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    background: #fff;
+    z-index: 10000;
+    padding: 30px;
+    transition: 0.4s;
+}
+
+.side-menu.active {
+    left: 0;
 }
