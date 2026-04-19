@@ -2368,74 +2368,66 @@ input[type="email"], input[type="text"], input[type="tel"] {
     color: #4CAF50;
 }
 
-/* تنسيقات أساسية للموبايل */
+/* تنسيق الموبايل فقط */
 @media (max-width: 768px) {
+    .yonyo-header {
+        background: #fff;
+        width: 100%;
+        margin-bottom: 0 !important; /* بيلغي الفراغ اللي بين الهيدر والشريط الأسود */
+        padding-top: 15px; /* بيزود حجم الهيدر من فوق */
+        border-bottom: 1px solid #eee;
+    }
+
     .header-wrapper {
         display: flex;
+        flex-direction: column; /* يخلي اللوجو فوق والصف التاني تحته */
         align-items: center;
-        justify-content: space-between; /* يوزع الشرطتين واللوجو والأيكونز */
-        padding: 10px 15px;
-        position: relative;
-        height: 60px;
+        gap: 15px; /* المسافة بين اللوجو وبين الصف اللي تحته */
     }
 
-    /* الشرطتين على الشمال */
-    .mobile-menu-btn {
-        display: block !important;
-        cursor: pointer;
-        z-index: 1001;
+    .logo-area img {
+        height: 35px; /* حجم اللوجو */
     }
 
-    /* اللوجو في النص بالظبط */
-    .logo-area {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        margin: 0 !important;
-    }
-
-    /* الأيقونات على اليمين */
-    .icons-area {
+    .header-controls {
+        width: 100%;
         display: flex;
-        gap: 10px;
+        justify-content: space-between; /* يودي الشرطتين شمال والأيكونز يمين */
+        align-items: center;
+        padding: 0 15px 10px 15px; /* مسافة من الجوانب ومن تحت */
     }
 
-    /* إخفاء المنيو وتحويلها لمنيو منسدل */
+    /* تنسيق المنيو لما تفتح */
     .nav-area {
         display: none; 
-        position: absolute;
-        top: 60px; /* تحت الهيدر بالظبط */
-        left: 0;
         width: 100%;
         background: #fff;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        z-index: 1000;
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        z-index: 9999;
+        border-top: 1px solid #f0f0f0;
     }
 
-    /* لما تدوسي على الزرار تظهر */
     .nav-area.active {
-        display: block;
+        display: block !important;
     }
 
     .nav-area ul {
-        flex-direction: column;
+        list-style: none;
         padding: 0;
+        margin: 0;
     }
 
-    .nav-area ul li {
-        width: 100%;
+    .nav-area li {
         text-align: center;
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid #eee;
     }
 
-    .nav-area ul li a {
+    .nav-area li a {
         display: block;
         padding: 15px;
         color: #000;
+        text-decoration: none;
     }
-}
-
-/* إخفاء زرار المنيو في اللاب توب */
-@media (min-width: 769px) {
-    .mobile-menu-btn { display: none; }
 }
