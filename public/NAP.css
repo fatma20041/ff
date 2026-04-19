@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+    max-width: 100%;
+}
 /* 1. استدعاء الخط */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
@@ -2366,4 +2370,63 @@ input[type="email"], input[type="text"], input[type="tel"] {
     background: #f9f9f9;
     padding-left: 35px; /* حركة بسيطة لليمين عند الهوفر */
     color: #4CAF50;
+}
+
+
+/* 2. تعديل الهيدر عشان يكون "مطاط" */
+.header-wrapper {
+    display: flex !important;
+    justify-content: space-between !important; /* بيوزع العناصر (منيو - لوجو - أيقونات) بالعدل */
+    align-items: center !important;
+    padding: 10px 5%; /* مسافة أمان 5% يمين وشمال عشان ميبقاش لازق في الحواف */
+    width: 100% !important;
+    flex-wrap: nowrap !important; /* يمنعهم ينزلوا تحت بعض */
+}
+
+/* 3. اللوجو: حجمه يتغير بناءً على الشاشة */
+.main-logo {
+    max-height: 60px; /* أقصى طول له على اللاب */
+    width: auto;
+    flex-shrink: 0; /* يمنع اللوجو إنه يتفعص لو الزحمة زادت */
+}
+
+@media (max-width: 768px) {
+    .main-logo {
+        max-height: 40px; /* يصغر شوية في الموبايل والتابلت */
+    }
+}
+
+/* 4. المنيو (القائمة): تختفي في الشاشات الصغيرة جداً أو تصغر */
+.nav-area ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 1024px) { /* التابلت والموبايل */
+    .nav-area ul {
+        gap: 10px; /* تقريب الكلام من بعضه */
+    }
+    .nav-area ul li a {
+        font-size: 13px; /* تصغير الخط بسيط */
+    }
+}
+
+@media (max-width: 480px) { /* الموبايل الصغير */
+    .nav-area ul li a {
+        font-size: 10px;
+        white-space: nowrap;
+    }
+}
+
+/* 5. شبكة المنتجات (الـ Grid): */
+.products-grid {
+    display: grid !important;
+    /* السطر اللي جاي ده هو السحر: */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important; 
+    /* معناه: رص المنتجات جنب بعض، ولو المكان ضيق نزل المنتج اللي ملوش مكان تحت لوحده تلقائياً */
+    gap: 20px !important;
+    padding: 20px !important;
 }
