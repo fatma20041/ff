@@ -11,7 +11,7 @@
 
        <header class="yonyo-header">
         <div class="header-wrapper">
-            <button class="menu-toggle" id="menu-btn">☰</button>
+            
             <nav class="nav-area">
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
@@ -57,17 +57,6 @@
 
         </div>
     </header>
-    <div class="side-menu" id="side-menu">
-    <button class="close-menu" id="close-menu">✕</button>
-
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="product.html">Products</a></li>
-        <li><a href="return.html">Return Policy</a></li>
-        <li><a href="shipping.html">Shipping</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
-</div>
     <div class="announcement-bar">
     <div class="scrolling-text">
         <span>Free shipping for orders above 999 EGP — Shop Now! &nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -370,31 +359,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-document.addEventListener('DOMContentLoaded', () => {
-            const menuBtn = document.getElementById("menu-btn");
-            const closeBtn = document.getElementById("close-menu");
-            const sideMenu = document.getElementById("side-menu");
+</script>
 
-            if (menuBtn && sideMenu && closeBtn) {
-                // فتح المنيو
-                menuBtn.onclick = (e) => {
-                    e.preventDefault();
-                    sideMenu.classList.add("active");
-                };
-
-                // قفل المنيو بالزرار
-                closeBtn.onclick = () => {
-                    sideMenu.classList.remove("active");
-                };
-
-                // قفل المنيو لو دوستي في أي مكان بره الصندوق الأبيض
-                document.addEventListener('click', (e) => {
-                    if (!sideMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-                        sideMenu.classList.remove("active");
-                    }
-                });
-            }
-        });
 
 </body>
 </html>
