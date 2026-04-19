@@ -113,6 +113,42 @@ body {
     .main-logo { height: 60px; }
     .logo-area { transform: translate(0, 0); }
 }
+/* زر المنيو + السيرش للموبايل */
+.mobile-controls {
+  display: none;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* الموبايل */
+@media (max-width: 768px) {
+  .nav-area {
+    display: none; /* نخفي المنيو العادية */
+  }
+  .icons-area {
+    display: none; /* نخفي الأيقونات الكبيرة */
+  }
+  .mobile-controls {
+    display: flex; /* نظهر زر المنيو + السيرش */
+    padding: 10px;
+  }
+  #navMenu {
+    display: none;
+    flex-direction: column;
+    background: #f9f9f9;
+    padding: 10px;
+  }
+  #navMenu ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 /* --- سكشن الـ Hero الأساسي --- */
 .hero-section {
     width: 100%;
