@@ -2390,50 +2390,83 @@ input[type="email"], input[type="text"], input[type="tel"] {
     }
 }
 
-/* نخبي زرار المنيو في الديسكتوب */
-.menu-toggle {
-    display: none;
-}
-
-/* الموبايل */
+/* --- تنسيق الموبايل المظبوط --- */
 @media (max-width: 768px) {
-
-    /* نخبي المنيو القديمة */
-    .nav-area {
-        display: none;
+    
+    /* 1. تقسيم الهيدر: شمال (منيو+سيرش) | نص (لوجو) | يمين (أيكونز) */
+    .header-wrapper {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr; /* تلات مناطق متساوية */
+        align-items: center;
+        padding: 10px 0;
     }
 
-    /* نظهر زرار المنيو */
+    /* 2. تجميع المنيو والسيرش في الشمال */
+    .nav-area {
+        display: flex !important; /* نخليه مرئي */
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        padding-top: 0 !important; /* نشيل الزيادة اللي كانت في اللاب */
+    }
+
+    /* نخفي الليستة العادية ونظهر الزرار والسيرش بس */
+    .nav-area ul { display: none; } 
+    
     .menu-toggle {
-        display: block;
-        font-size: 22px;
+        display: block !important;
+        font-size: 24px;
         background: none;
         border: none;
+        cursor: pointer;
+        padding: 0;
     }
 
-    /* نعدل توزيع الهيدر */
-    .header-wrapper {
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
+    /* 3. اللوجو في النص وكبير */
+    .logo-area {
+        grid-column: 2; /* يضمن إنه في العمود اللي في النص */
+        transform: none !important; /* نشيل أي تحريك قديم */
+        display: flex;
+        justify-content: center;
     }
 
-    /* نقلل حجم اللوجو */
     .main-logo {
-        height: 60px;
+        height: 70px !important; /* كبرنا اللوجو في الموبايل */
+    }
+
+    /* 4. الأيقونات في اليمين */
+    .icons-area {
+        padding-top: 0 !important;
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
     }
 }
+
+/* --- تنسيق المنيو الجانبية (Side Menu) --- */
 .side-menu {
     position: fixed;
     top: 0;
-    left: -100%;
-    width: 80%;
+    left: -100%; /* مستخبية شمال */
+    width: 280px;
     height: 100%;
     background: #fff;
-    z-index: 10000;
-    padding: 30px;
-    transition: 0.4s;
+    z-index: 10005; /* أعلى من أي حاجة */
+    padding: 60px 20px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 10px 0 20px rgba(0,0,0,0.1);
 }
 
 .side-menu.active {
-    left: 0;
+    left: 0; /* تظهر لما تدوسي */
+}
+
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
 }
