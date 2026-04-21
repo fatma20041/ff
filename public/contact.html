@@ -322,7 +322,7 @@
                     // إظهار رسالة جاري الإرسال فوراً
                     showStatusPopup("Sending your message... 📧");
 
-                    fetch('/api/contact', {
+                    fetch('https://your-project-name.vercel.app/api/contact, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(formData),
